@@ -10,3 +10,16 @@
 #job-container .panel-body{
   padding: 5%;
 }
+
+.panel-container {
+  padding: 2% 10%;
+}
+
+.panel-container h1{
+  font-size: 2em;
+  text-align: center;
+}
+
+.panel-container .panel-body{
+  padding: 5%;
+}
