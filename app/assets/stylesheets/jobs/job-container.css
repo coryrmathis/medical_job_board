@@ -1,0 +1,12 @@
+#job-container {
+  padding: 2% 10%;
+}
+
+#job-container h1{
+  font-size: 2em;
+  text-align: center;
+}
+
+#job-container .panel-body{
+  padding: 5%;
+}
