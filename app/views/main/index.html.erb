@@ -1,11 +1,46 @@
-<div class="panel-container">
-  <div class="panel panel-success">
-    <div class="panel-heading">
-      <h1 class="panel-title">Coming Soon</h1>
-    </div>
-    <div class="panel-body">
-      Our site is currently under construction.
+<div id="landing-page">
+  <div class="job-search-form">
+    <h3>Search Jobs</h3>
+    <div>
+      <form method="GET" action="/jobs">
+        <div class="form-group">
+          <select class="form-control">
+              <option>Specialty</option>
+            <%=specialties.each do |specialty|%>
+              <option><%=specialty%></option>
+            <%end%>
+          </select>
+        </div>
+        <form>
+        <div class="form-group">
+          <select class="form-control">
+              <option>State</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="form-control">
+              <option>City</option>
+          </select>
+        </div>
+        <h4>Visas</h4>
+        <div class="form-group visas-radio">
+          <div class="radio-inline">
+            <input checked type="radio" name="poop">None
+          </div>
+          <div class="radio-inline">
+            <input type="radio" name="poop">J1
+          </div>
+          <div class="radio-inline">
+            <input type="radio" name="poop">H1
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" name="" placeholder="Keywords (ex. 'salary', 'robotics', etc.)" class="form-control">
+        </div>
+        <div class="form-group">
+          <input class="btn" type="submit" value="Search">
+        </div>
+      </form>
     </div>
   </div>
 </div>
-
