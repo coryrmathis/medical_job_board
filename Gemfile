@@ -57,6 +57,8 @@ gem 'sidekiq'
 gem 'sidekiq-cron'
 gem 'sinatra'
 
+gem 'aws-sdk-s3', '~> 1'
+
 gem "rest-client"
 
 gem "redcarpet"
