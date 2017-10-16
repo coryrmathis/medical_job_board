@@ -54,6 +54,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'sidekiq'
+gem 'sidekiq-cron'
 gem 'sinatra'
 
 gem "rest-client"
