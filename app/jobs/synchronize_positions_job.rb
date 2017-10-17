@@ -21,10 +21,11 @@ class SynchronizePositionsJob
     }
 
     SmarterCSV.process(file, options) do |chunk|
-      chunk.each do |job|
+      chunk.each do |position|
         # Any Job that isn't present in the list but is in the db must be detected and deleted
         # Find Job by aid/id
         # Update if found/Create if not
+        JobImporter.new.import(position)
       end
     end
   end
