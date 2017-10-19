@@ -1,0 +1,4 @@
+synchronize_positions:
+  cron: "0 2 * * * America/Chicago"
+  class: "SynchronizePositionsJob"
+  queue: "default"
