@@ -6,7 +6,7 @@ class JobsController < ApplicationController
   rescue RestClient::NotFound => e 
     render 'errors/job_unavailable'
   else
-    @job = Job.new(JSON.parse(response.body))
+    @job = PlaceholderJob.new(JSON.parse(response.body))
 
   end
 end
