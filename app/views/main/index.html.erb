@@ -4,38 +4,41 @@
     <div>
       <form method="GET" action="/jobs">
         <div class="form-group">
-          <select class="form-control">
-              <option>Specialty</option>
+          <select name="job[specialty]" class="form-control">
+              <option value="">Specialty</option>
             <%=specialties.each do |specialty|%>
-              <option><%=specialty%></option>
+              <option value="<%=specialty%>"><%=specialty%></option>
             <%end%>
           </select>
         </div>
         <form>
         <div class="form-group">
-          <select class="form-control">
-              <option>State</option>
+          <select name="job[state]" class="form-control">
+              <option value="">State</option>
+              <%CS.states(:us).each do |key, value|%>
+                <option value="<%=key%>"><%=value%></option>
+              <%end%>
           </select>
         </div>
         <div class="form-group">
-          <select class="form-control">
-              <option>City</option>
+          <select name="job[city]" class="form-control">
+              <option value="">City</option>
           </select>
         </div>
         <h4>Visas</h4>
         <div class="form-group visas-radio">
           <div class="radio-inline">
-            <input checked type="radio" name="poop">None
+            <input checked type="radio" name="job[visas]" value="">None
           </div>
           <div class="radio-inline">
-            <input type="radio" name="poop">J1
+            <input type="radio" name="job[visas]" value="j1">J1
           </div>
           <div class="radio-inline">
-            <input type="radio" name="poop">H1
+            <input type="radio" name="job[visas]" value="h1">H1
           </div>
         </div>
         <div class="form-group">
-          <input type="text" name="" placeholder="Keywords (ex. 'salary', 'robotics', etc.)" class="form-control">
+          <input type="text" name="job[keywords]" placeholder="Keywords (ex. 'salary', 'robotics', etc.)" class="form-control">
         </div>
         <div class="form-group">
           <input class="btn" type="submit" value="Search">

@@ -2,7 +2,7 @@ class JobsController < ApplicationController
 
 
   def index
-    render json: params
+    @jobs = Job.search(params[:job])
   end
 
 

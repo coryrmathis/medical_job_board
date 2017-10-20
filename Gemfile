@@ -66,3 +66,4 @@ gem 'aws-sdk-s3', '~> 1'
 gem "rest-client"
 
 gem "redcarpet"
+gem "city-state"

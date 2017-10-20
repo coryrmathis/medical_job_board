@@ -1,0 +1,8 @@
+<h1>Search Results: <%=@jobs.count%></h1>
+<table>
+  <%@jobs.each do |job|%>
+    <tr>
+      <td><%=job.specialty%></td>
+    </tr>
+  <%end%>
+</table>
