@@ -13,7 +13,7 @@
         </div>
         <form>
         <div class="form-group">
-          <select name="job[state]" class="form-control">
+          <select id="state-dropdown" name="job[state]" class="form-control">
               <option value="">State</option>
               <%CS.states(:us).each do |key, value|%>
                 <option value="<%=key%>"><%=value%></option>
