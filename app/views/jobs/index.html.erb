@@ -7,6 +7,7 @@
         <td>Specialty</td>
         <td>City</td>
         <td>State</td>
+        <td>Visas</td>
       </tr>
     </thead>
     <%@jobs.each_with_index do |job, i|%>
@@ -15,6 +16,7 @@
         <td><%=link_to job.specialty, job_path(job)%></td>
         <td><%=job.city%></td>
         <td><%=job.state%></td>
+        <td><%=job.visas%></td>
       </tr>
     <%end%>
   </table>
