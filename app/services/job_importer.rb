@@ -14,10 +14,8 @@ class JobImporter
 
     if job 
       job.update(job_data)
-      puts "updated"
     else
       Job.create(job_data)
-      puts "created"
     end
   end
 
