@@ -1,11 +1,47 @@
-<div class="panel-container">
-  <div class="panel panel-success">
-    <div class="panel-heading">
-      <h1 class="panel-title">Coming Soon</h1>
-    </div>
-    <div class="panel-body">
-      Our site is currently under construction.
+<div id="landing-page">
+  <div class="job-search-form">
+    <h3>Search Jobs</h3>
+    <div>
+      <form method="GET" action="/jobs">
+        <div class="form-group">
+          <select name="job[specialty]" class="form-control">
+              <option value="">Specialty</option>
+            <%=specialties.each do |specialty|%>
+              <option value="<%=specialty%>"><%=specialty%></option>
+            <%end%>
+          </select>
+        </div>
+        <form>
+        <div class="form-group">
+          <select id="state-dropdown" name="job[state]" class="form-control">
+              <option value="">State</option>
+              <%CS.states(:us).each do |key, value|%>
+                <option value="<%=key%>"><%=value%></option>
+              <%end%>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="text" name="job[city]" placeholder="City" class="form-control">
+        </div>
+        <h4>Visas</h4>
+        <div class="form-group visas-radio">
+          <div class="radio-inline">
+            <input checked type="radio" name="job[visas]" value="">None
+          </div>
+          <div class="radio-inline">
+            <input type="radio" name="job[visas]" value="j1">J1
+          </div>
+          <div class="radio-inline">
+            <input type="radio" name="job[visas]" value="h1">H1
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" name="job[subspecialty_keywords]" placeholder="Subspecialties/Keywords" class="form-control">
+        </div>
+        <div class="form-group">
+          <input class="btn" type="submit" value="Search">
+        </div>
+      </form>
     </div>
   </div>
 </div>
-

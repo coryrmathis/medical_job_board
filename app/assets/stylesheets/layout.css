@@ -1,0 +1,15 @@
+#app-container{
+  height: 100vh;
+}
+
+#nav-main {
+  background-color: #3097d1;
+  color: white;
+}
+
+#nav-main #brand {
+  padding: 1%;
+  font-size: 2em;
+  font-weight: 100;
+}
+

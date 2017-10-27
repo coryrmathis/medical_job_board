@@ -1,0 +1,13 @@
+thead {
+  font-weight: bold;
+}
+
+#brand a {
+  color: white;
+  text-decoration: none;
+}
+
+#brand a:hover {
+  color: white;
+  text-decoration: none;
+}

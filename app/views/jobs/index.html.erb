@@ -1,0 +1,24 @@
+<div id="job-search-results">
+  <h1>Search Results: <%=@jobs.count%></h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <td></td>
+        <td>Specialty</td>
+        <td>City</td>
+        <td>State</td>
+        <td>Visas</td>
+      </tr>
+    </thead>
+    <%@jobs.each_with_index do |job, i|%>
+      <tr>
+        <td><%=i + 1%></td>
+        <td><%=link_to job.specialty, job_path(job)%></td>
+        <td><%=job.city%></td>
+        <td><%=job.state%></td>
+        <td><%=job.visas%></td>
+      </tr>
+    <%end%>
+  </table>
+</div>
+
