@@ -7,7 +7,19 @@ thead {
   text-decoration: none;
 }
 
+#brand {
+  display: inline-block;
+}
+
 #brand a:hover {
   color: white;
   text-decoration: none;
+}
+
+#landing-page #tagline {
+  font-style: italic;
+  font-weight: 200;
+  font-size: 1.7em;
+  position: relative;
+  top: -17%
 }
