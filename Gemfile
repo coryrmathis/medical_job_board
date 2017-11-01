@@ -68,3 +68,4 @@ gem "rest-client"
 
 gem "redcarpet"
 gem "city-state"
+gem "kaminari", '~> 1.1'

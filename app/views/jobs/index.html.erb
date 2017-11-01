@@ -1,5 +1,6 @@
 <div id="job-search-results">
-  <h1>Search Results: <%=@jobs.count%></h1>
+  <h1>Search Results: <%=@jobs.total_count%></h1>
+  <%=paginate @jobs%>
   <table class="table table-striped">
     <thead>
       <tr>
