@@ -7,7 +7,7 @@
         <div class="form-group">
           <select name="job[specialty]" class="form-control">
               <option value="">Specialty</option>
-            <%=specialties.each do |specialty|%>
+            <%=@specialties.each do |specialty|%>
               <option value="<%=specialty%>"><%=specialty%></option>
             <%end%>
           </select>
