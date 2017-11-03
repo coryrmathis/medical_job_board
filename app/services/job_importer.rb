@@ -17,7 +17,6 @@ class JobImporter
     else
       job = Job.create(job_data)
     end
-    puts failed_specialty if job.errors && failed_specialty
   end
 
   private
