@@ -1,5 +1,7 @@
 class Job < ApplicationRecord
 
+  validates :specialty, presence: true
+
   scope :archway, ->{where.not(aid: nil)}
 
   def self.search(args)
