@@ -40,6 +40,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    airbrake (7.1.0)
+      airbrake-ruby (~> 2.5)
+    airbrake-ruby (2.5.1)
     arel (8.0.0)
     aws-partitions (1.26.0)
     aws-sdk-core (3.6.0)
@@ -241,6 +244,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  airbrake (~> 7.1)
   aws-sdk-s3 (~> 1)
   byebug
   capybara (~> 2.13)
