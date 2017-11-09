@@ -3,13 +3,30 @@
 }
 
 #nav-main {
-  background-color: #3097d1;
+  /*background-color: #3097d1;*/
   color: white;
 }
 
 #nav-main #brand {
   padding: 1%;
-  font-size: 2em;
+  font-size: 2.4em;
   font-weight: 100;
+  font-family: 'Jaldi', sans-serif;
+}
+
+.ocean-breeze {
+  background-color: #78A5A3;
+}
+
+.navy {
+  background-color: #444C5C
+}
+
+.warm {
+  background-color: #E1B16A
+}
+
+.warm-border {
+  border: 1px solid #E1B16A;
 }
 

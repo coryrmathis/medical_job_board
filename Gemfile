@@ -70,3 +70,4 @@ gem "redcarpet"
 gem "city-state"
 gem "kaminari", '~> 1.1'
 gem 'airbrake', '~> 7.1'
+gem "font-awesome-rails"
