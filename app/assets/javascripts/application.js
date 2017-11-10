@@ -12,4 +12,5 @@
 //
 //= require jquery/dist/jquery.min.js
 //= require rails-ujs
+//= require bootstrap/js/modal.js
 //= require_tree .

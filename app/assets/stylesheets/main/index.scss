@@ -1,0 +1,82 @@
+#brand {
+
+  display: inline-block;
+  padding: 1%;
+  font-size: 2.4em;
+  font-weight: 100;
+  font-family: 'Jaldi', sans-serif;
+
+  a{
+    color: white;
+    text-decoration: none;
+  }
+
+  a:hover {
+  color: white;
+  text-decoration: none;
+  }
+}
+
+
+#landing-page{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  #tagline {
+    font-style: italic;
+    font-weight: 200;
+    font-size: 1.7em;
+    position: relative;
+    top: -17%
+  }
+} 
+
+
+
+#app-container{
+  height: 100vh;
+}
+
+#nav-main {
+  color: white;
+}
+
+.job-search-form {
+  background-color: #efefef;
+  top: -10%;
+  position: relative;
+  padding: 0 5% 1%;
+  width: 40%;
+  border: solid #c0c0c0 .1em;
+  border-radius: 10px;
+
+  h4{
+    text-align: center;
+    font-weight: 200;
+  }
+
+  .visas-radio {
+    text-align: center;
+  }
+
+  h3{
+    text-align: center;
+    font-weight: 200;
+  }
+
+  input[type='submit']{
+    display: block;
+    margin: 0 auto;
+    border: solid #c0c0c0 .1em;
+  }
+
+  input[type='submit']:hover{
+    background-color: #dda864;
+    color: white;
+    border-color: #eac79d;
+  }
+
+}

@@ -1,0 +1,45 @@
+thead {
+  font-weight: bold;
+}
+
+.ocean-breeze {
+  background-color: #78A5A3;
+}
+
+.navy {
+  background-color: #444C5C
+}
+
+.warm {
+  background-color: #E1B16A
+}
+
+.warm-border {
+  border: 1px solid #E1B16A;
+}
+
+.btn-punch {
+  background-color: #CE5A57;
+  border-color: #a84645;
+  color: white;
+
+  &:hover{
+    background-color: #a84645; 
+    color: white;
+  }
+
+  &:active{
+    background-color: #a84645; 
+    color: green;
+  }
+
+  &:focus{
+    background-color: #a84645; 
+    color: white;
+  }
+
+  &:visited{
+    background-color: #a84645; 
+    color: white;
+  }
+}
