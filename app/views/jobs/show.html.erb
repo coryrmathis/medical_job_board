@@ -1,8 +1,13 @@
 <div id="job-container">
-  <div class="panel panel-info">
+  <div class="panel">
     <div class="panel-heading">
       <h1 class="panel-title"><%="#{@job.specialty} Opening In #{@job.city}, #{@job.state}"%></h1>
+      <div class="panel-title">
+        <button class="btn btn-default btn-punch btn-lg apply-btn">Apply</button>
+      </div>
     </div>
-    <div class="panel-body"><%=@job.job_description_markup%></div>
+    <div class="panel-body">
+      <%=@job.job_description_markup%>
+    </div>
   </div>
 </div>
