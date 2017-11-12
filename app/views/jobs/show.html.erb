@@ -1,11 +1,10 @@
-
-
+<%=render "application"%>
 <div id="job-container">
   <div class="panel">
     <div class="panel-heading">
       <h1 class="panel-title"><%="#{@job.specialty} Opening In #{@job.city}, #{@job.state}"%></h1>
       <div class="panel-title">
-        <button class="btn btn-punch btn-lg apply-btn">Apply</button>
+        <button class="btn btn-punch btn-lg apply-btn" data-toggle="modal" data-target="#applicationModal">Apply</button>
       </div>
     </div>
     <div class="panel-body">
