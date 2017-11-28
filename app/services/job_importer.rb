@@ -25,6 +25,7 @@ class JobImporter
     data = set_aid(data)
     data = set_specialty(data)
     data = set_subspecialty_keywords(data)
+    data = set_contact_email(data)
     return data
   end
 
@@ -46,6 +47,11 @@ class JobImporter
 
   def set_subspecialty_keywords(data)
     data[:subspecialty_keywords] = data.delete(:job_title)
+    return data
+  end
+
+  def set_contact_email(data)
+    data[:contact_email] = data.delete(:recruiter_email)
     return data
   end
 
