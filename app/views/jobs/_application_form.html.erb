@@ -1,35 +1,32 @@
-<form id="apply-register-form" method="POST" action="/applicants">
+<%=form_tag({action: :create, controller: :applications}, multipart: true) do%>
+<!-- <form enctype='multipart/form-data' id="apply-register-form" method="POST" action="/applications"> -->
 
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">Account Info</h4> 
     </div>
-    <div class="row">
+    <div class="panel-body">
+      <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <input type="text" name="" class="form-control" placeholder="Email" required>
-        </div>
-      </div>
-      <div class="col-md-6">
-      
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <input type="password" name="" class="form-control" placeholder="Password" required>
+          <input type="text" name="application[first_name]" class="form-control" placeholder="First Name" required>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <input type="password" name="" class="form-control" placeholder="Confirm Password" required>
+          <input type="text" name="application[last_name]" class="form-control" placeholder="Last Name" required>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <select name="" class="form-control" required>
+          <input type="text" name="application[email]" class="form-control" placeholder="Email" required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <select name="application[specialty]" class="form-control" required>
               <option value="">Specialty</option>
             <%=Specialty.pluck(:name).sort.each do |specialty|%>
               <option value="<%=specialty%>"><%=specialty%></option>
@@ -37,47 +34,27 @@
           </select>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <input type="text" name="" class="form-control" placeholder="State Preference">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Contact Info</h3>
     </div>
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <input type="text" name="" class="form-control" placeholder="First Name">
+          <input type="text" name="application[location_preference]" class="form-control" placeholder="Location Preference">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <input type="text" name="" class="form-control" placeholder="Last Name">
+          <%=file_field_tag "CV", name: "application[cv]"%>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <input type="text" name="" class="form-control" placeholder="TBD">
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <input type="text" name="" class="form-control" placeholder="TBD">
-        </div>
-      </div>
     </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     <button type="submit" class="btn btn-primary submit-application-btn">Apply</button>
   </div>
-</form>
+<!-- </form> -->
+<%end%>
 
 
 

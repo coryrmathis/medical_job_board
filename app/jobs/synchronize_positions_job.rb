@@ -56,8 +56,8 @@ class SynchronizePositionsJob
 
   def configure_s3
     Aws.config.update({
-      region: ENV['ARCHWAY_S3_REGION'],
-      credentials: Aws::Credentials.new(ENV['ARCHWAY_S3_ACCESS_KEY'], ENV['ARCHWAY_S3_SECRET_KEY'])
+      region: ENV['S3_REGION'],
+      credentials: Aws::Credentials.new(ENV['S3_ACCESS_KEY'], ENV['S3_SECRET_KEY'])
     })
 
     Aws::S3::Client.new
