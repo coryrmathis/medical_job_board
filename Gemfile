@@ -54,22 +54,39 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# Environment variables
 gem 'figaro'
 
+# Background Jobs
 gem 'sidekiq'
 gem 'sidekiq-cron'
 gem 'sinatra'
 
+# CSV processing
 gem 'smarter_csv'
 
+# Cloud storage
 gem 'aws-sdk-s3', '~> 1'
 
-gem "rest-client"
-
+# Markdown -> HTML
 gem "redcarpet"
+
+# Location info
 gem "city-state"
+
+# Pagination
 gem "kaminari", '~> 1.1'
+
+# Error handling
 gem 'airbrake', '~> 7.1'
+
+# Icons and images
 gem "font-awesome-rails"
 
+# User authentication
 gem "devise"
+
+# File uploading
+
+gem 'carrierwave', '~> 1.0'
+gem "fog-aws"

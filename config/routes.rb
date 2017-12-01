@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get "/cities/:state", to: "misc#cities"
   resources :jobs, only: [:show, :index]
 
-  post "/applications", to: "applications#poop"
+  resources :applications, only: [:create]
 
   root "main#index"
 end
