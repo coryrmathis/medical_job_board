@@ -14,6 +14,11 @@
       <div id="nav-main" class="ocean-breeze">
         <div id="brand"><%=link_to("AllPhysicianCareers", "/")%> <%=fa_icon("heartbeat")%></div>
       </div>
+      <%if alert%>
+        <aside class="alert alert-warning" id="alert"><%= alert %></aside>
+      <%elsif notice%>
+        <aside class="alert alert-info" id="notice"><%= notice %></aside>
+      <%end%>
       <%= yield %>
     </div>
     

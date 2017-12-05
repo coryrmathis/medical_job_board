@@ -2,7 +2,10 @@ class ApplicationsController < ApplicationController
 
   def create
     application = Application.new(application_params)
-    redirect_to :root if application.save
+    
+    if application.save
+      redirect_back fallback_location: root_path, notice: "Application successfully submitted"
+    end
   end
 
   private
@@ -14,6 +17,7 @@ class ApplicationsController < ApplicationController
       :email,
       :specialty,
       :location_preference,
+      :visa_requirements,
       :cv
     )
   end
