@@ -19,7 +19,10 @@
       <%elsif notice%>
         <aside class="alert alert-info" id="notice"><%= notice %></aside>
       <%end%>
-      <%= yield %>
+      <div id="main-content-container">
+        <%= yield %>
+      </div>
+      
     </div>
     
   </body>
