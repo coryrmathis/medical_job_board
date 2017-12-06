@@ -1,5 +1,5 @@
 <%=form_tag({action: :create, controller: :applications}, multipart: true) do%>
-
+  <%=hidden_field_tag "application[job_id]", @job.id%>
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">Candidate Information</h4> 
@@ -38,7 +38,7 @@
         <div class="col-md-6">
           <h6>Visa Requirements</h6>
           <div class="form-group">
-            <input type="radio" name="application[visa_requirements]" value="" checked>
+            <input type="radio" name="application[visa_requirements]" value="None" checked>
             <label>None</label>
             <input type="radio" name="application[visa_requirements]" value="H1">
             <label>H1</label>

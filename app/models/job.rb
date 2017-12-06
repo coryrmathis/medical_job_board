@@ -1,4 +1,5 @@
 class Job < ApplicationRecord
+  has_many :applications
 
   validates :specialty, presence: true
 

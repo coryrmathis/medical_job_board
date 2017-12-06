@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <p>A candidate applied to one of your jobs on AllPhysicianCareers.com!</p>
+  <h5>Name:</h5>
+  <p><%="#{@application.first_name} #{@application.last_name}"%></p>
+  <h5>Email:</h5>
+  <p><%=@application.email%></p>
+  <h5>Specialty:</h5>
+  <p><%=@application.specialty%></p>
+  <h5>Job Id:</h5>
+  <p><%=@application.job_aid%></p>
+  <h5>Visa Requirements:</h5>
+  <p><%=@application.visa_requirements%></p>
+  <h5>Location Preference:</h5>
+  <p><%=@application.location_preference%></p>
+  <h6>If the candidate uploaded a CV, it is attached below!</h6>
+
+</body>
+</html>
