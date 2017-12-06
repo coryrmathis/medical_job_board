@@ -1,5 +1,5 @@
 class Application < ApplicationRecord
-  has_one :job
+  belongs_to :job
   mount_uploader :cv, CVUploader
 
   
