@@ -5,4 +5,7 @@ class CVUploader < CarrierWave::Uploader::Base
     "uploads/cvs"
   end
 
+  def cache_dir
+    "tmp/cvs"
+  end
 end
