@@ -18,6 +18,7 @@ class ApplicationsController < ApplicationController
       :specialty,
       :location_preference,
       :visa_requirements,
+      :job_id,
       :cv
     )
   end

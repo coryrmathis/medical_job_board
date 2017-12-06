@@ -1,5 +1,5 @@
 <%=form_tag({action: :create, controller: :applications}, multipart: true) do%>
-
+  <%=hidden_field_tag "application[job_id]", @job.id%>
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">Candidate Information</h4> 
