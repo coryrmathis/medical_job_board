@@ -8,7 +8,11 @@
           <select name="job[specialty]" class="form-control">
               <option value="">Specialty</option>
             <%=@specialties.each do |specialty|%>
-              <option value="<%=specialty%>"><%=specialty%></option>
+              <%if specialty == "Advanced Practice - ALL"%>
+                <option value="Advanced Practice"><%=specialty%></option>
+              <%else%>
+                <option value="<%=specialty%>"><%=specialty%></option>
+              <%end%>
             <%end%>
           </select>
         </div>
