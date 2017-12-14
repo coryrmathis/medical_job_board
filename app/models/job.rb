@@ -6,10 +6,7 @@ class Job < ApplicationRecord
   scope :archway, ->{ where.not(aid: nil) }
 
   def self.search(args)
-    args = args.reject{ |k,v| v.blank?}
-    query_string = args.keys.map { |key| "lower(#{key.to_s}) LIKE ?"}.join(" AND ")
-    search_values = args.values.map{ |value| "%#{value.downcase}%"}
-    where(query_string, *search_values).order(:state)
+    Jobs::Search.start(args)
   end
 
   def job_description_markup

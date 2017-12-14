@@ -4,24 +4,24 @@
   <title></title>
 </head>
 <body>
-  <p>A candidate applied to one of your jobs on AllPhysicianCareers.com!</p>
-  <h5>Name:</h5>
-  <p><%="#{@application.first_name} #{@application.last_name}"%></p>
-  <h5>Email:</h5>
-  <p><%=@application.email%></p>
-  <h5>Specialty:</h5>
-  <p><%=@application.specialty%></p>
-  <h5>Job Id:</h5>
-  <p><%=@job.aid%></p>
-  <h5>Job City:</h5>
-  <p><%=@job.city%></p>
-  <h5>Job State</h5>
-  <p><%=@job.state%></p>
-  <h5>Visa Requirements:</h5>
-  <p><%=@application.visa_requirements%></p>
-  <h5>Location Preference:</h5>
-  <p><%=@application.location_preference%></p>
-  <h6>If the candidate uploaded a CV, it is attached below!</h6>
+  <div style="text-align: center">A candidate applied to one of your jobs on AllPhysicianCareers.com!</div>
+  <h3 style="text-align: center">Name:</h3>
+  <div style="text-align: center"><%="#{@application.first_name} #{@application.last_name}"%></div>
+  <h3 style="text-align: center">Email:</h3>
+  <div style="text-align: center"><%=@application.email%></div>
+  <h3 style="text-align: center">Specialty:</h3>
+  <div style="text-align: center"><%=@application.specialty%></div>
+  <h3 style="text-align: center">Job Id:</h3>
+  <div style="text-align: center"><%=@job.aid%></div>
+  <h3 style="text-align: center">Job City:</h3>
+  <div style="text-align: center"><%=@job.city%></div>
+  <h3 style="text-align: center">Job State</h3>
+  <div style="text-align: center"><%=@job.state%></div>
+  <h3 style="text-align: center">Visa Requirements:</h3>
+  <div style="text-align: center"><%=@application.visa_requirements%></div>
+  <h3 style="text-align: center">Location Preference:</h3>
+  <div style="text-align: center"><%=@application.location_preference%></div>
+  <h4>If the candidate uploaded a CV, it is attached below!</h4>
 
 </body>
 </html>
