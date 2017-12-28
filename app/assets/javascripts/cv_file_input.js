@@ -6,7 +6,7 @@ $(document).ready(function(){
     input.on("change", function(e){
       var fileName = "";
       if(this.files && this.files.length == 1){
-        var fileName = e.target.value.split( '\\' ).pop();
+        var fileName = e.target.value
 
         label.css("color", "#CE5A57")
         label.after("<h4>" + fileName + "</h4>")
