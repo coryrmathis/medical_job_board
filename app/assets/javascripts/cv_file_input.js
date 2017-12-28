@@ -9,11 +9,12 @@ $(document).ready(function(){
         var fileName = this.files[0].name;
         console.log(fileName)
         label.css("color", "#CE5A57")
+        label.next("h4").remove()
         label.after("<h4>" + fileName + "</h4>")
 
       }else{
         label.css("color", "black")
-        label.next("h4").remove()
+        
       }
     })
   })
