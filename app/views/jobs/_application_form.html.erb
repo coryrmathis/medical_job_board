@@ -35,29 +35,35 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
-          <h6>Visa Requirements</h6>
+        <div id="new-application-citizenship-input" class="col-md-6">
           <div class="form-group">
-            <input type="radio" name="application[visa_requirements]" value="None" checked>
-            <label>None</label>
-            <input type="radio" name="application[visa_requirements]" value="H1">
-            <label>H1</label>
-            <input type="radio" name="application[visa_requirements]" value="J1">
-            <label>J1</label>
+            <select class="form-control" name="application[citizenship]" required>
+              <option value="">Citizenship</option>
+              <option value="US">US</option>
+              <option value="GC">GC</option>
+              <option value="H1">H1</option>
+              <option value="J1">J1</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <input id="job-application-location-preference" type="text" name="application[location_preference]" class="form-control" placeholder="Location Preference">
-            <div>Ex. CA, IL, GA</div>
+            <input id="job-application-location-preference" type="text" name="application[location_preference]" class="form-control" placeholder="Location Preference e.g. CA, IL, GA">
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-6">
+          <div id="new-application-cv-input" class="form-group">
+            <h4>Upload Your CV</h4>
+            <label for="CV"><%=fa_icon("cloud-upload")%></label>
+            <%=file_field_tag "CV", name: "application[cv]", class: "cloud-file-input"%>
+          </div>
+        </div>
+        <div class="col-md-6">
           <div class="form-group">
-            <label>Upload Your CV</label>
-            <%=file_field_tag "CV", name: "application[cv]"%>
+            <textarea name="application[comments]" class="form-control" placeholder="Additional Comments i.e. explain 'other' citizenship, special requirements, malpractice issues, contact availability..." rows="5"></textarea>
           </div>
         </div>
       </div>
