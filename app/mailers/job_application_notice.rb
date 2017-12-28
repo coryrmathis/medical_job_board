@@ -14,9 +14,9 @@ class JobApplicationNotice < ApplicationMailer
 
   def recipient
     if Rails.env == "development"
-      return "coryrmathis@gmail.com"
+      return "cmathis@archwayrecruiters.com"
     else
-      @job.contact_email || "coryrmathis@gmail.com"
+      @job.contact_email || "cmathis@archwayrecruiters.com"
     end
   end
 end
