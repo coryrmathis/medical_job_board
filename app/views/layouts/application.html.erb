@@ -4,7 +4,7 @@
     <%=favicon_link_tag "favicon2.ico"%>
     <title>AllPhysicianCareers</title>
     <%= csrf_meta_tags %>
-    <link href="https://fonts.googleapis.com/css?family=Catamaran:800|Jaldi:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:800|Jaldi:400,700|Open+Sans+Condensed:300,700" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -13,6 +13,9 @@
     <div id="app-container">
       <div id="nav-main" class="ocean-breeze">
         <div id="brand"><%=link_to("AllPhysicianCareers", "/")%> <%=fa_icon("heartbeat")%></div>
+        <a class="nav-main-links" href="/">Search</a>
+        <a class="nav-main-links" href="/contact">Contact</a>
+        <!-- <a class="nav-main-links" href="/about">About</a> -->
       </div>
       <div id="main-content-container">
         <%if alert%>
