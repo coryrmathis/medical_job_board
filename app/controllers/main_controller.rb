@@ -4,9 +4,6 @@ class MainController < ApplicationController
     @specialties = Specialty.pluck(:name).sort
   end
 
-  def contact
-  end
-
   def about
   end
 end

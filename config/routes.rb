@@ -10,7 +10,5 @@ Rails.application.routes.draw do
   resources :applications, only: [:create]
 
   # Main Routes
-  get "/contact", to: "main#contact"
-  get "/about", to: "main#about"
   root "main#index"
 end
