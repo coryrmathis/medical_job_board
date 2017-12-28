@@ -6,8 +6,8 @@ $(document).ready(function(){
     input.on("change", function(e){
       var fileName = "";
       if(this.files && this.files.length == 1){
-        var fileName = this.files[0].name
-
+        var fileName = this.files[0].name;
+        console.log(fileName)
         label.css("color", "#CE5A57")
         label.after("<h4>" + fileName + "</h4>")
 
