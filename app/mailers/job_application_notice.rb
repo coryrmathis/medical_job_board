@@ -7,7 +7,7 @@ class JobApplicationNotice < ApplicationMailer
     unless @application.cv.file.nil?
       attachments[@application.cv_identifier] = open(@application.cv.url).read
     end
-    mail(to: recipient, subject: "New Job Application")
+    mail(to: recipient, subject: "New Job Application", reply_to: @application.email)
   end
 
   private
