@@ -5,7 +5,7 @@ class ApplicationsController < ApplicationController
     
     if application.save
       NewJobApplicationNoticeEmail.perform_async(application.id)
-      redirect_back fallback_location: root_path, notice: "Application successfully submitted"
+      redirect_back fallback_location: root_path, notice: application.new_application_notice
     end
   end
 
