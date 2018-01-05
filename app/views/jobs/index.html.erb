@@ -1,5 +1,12 @@
 <div id="job-search-results">
   <h1>Search Results: <%=@jobs.total_count%></h1>
+  <select class="form-control" id="job-index-sort-select" name="sort">
+    <option value="">Sort By</option>
+    <option value="specialty">Specialty</option>
+    <option value="city">City</option>
+    <option value="state">State</option>
+    <option value="visas">Visas</option>
+  </select>
   <%=paginate @jobs%>
   <table class="table table-striped">
     <thead>

@@ -3,6 +3,7 @@ class Job < ApplicationRecord
 
   validates :specialty, presence: true
 
+  default_scope { order(:state) }
   scope :specialty, ->(specialty){ where("lower(specialty) LIKE ?", "#{specialty.downcase}")}
   scope :state, ->(state){ where("lower(state) LIKE ?", state.downcase)}
   scope :city, ->(city){where("lower(city) LIKE ? OR lower(distance_to_metro) LIKE ?", "%#{city.downcase}%", "%#{city.downcase}%")}
@@ -15,7 +16,7 @@ class Job < ApplicationRecord
     args.each do |k,v|
       jobs = jobs.public_send(k, v) if v.present?
     end
-    jobs.order(:state)
+    jobs
   end
 
   def job_description_markup

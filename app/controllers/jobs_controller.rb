@@ -2,7 +2,16 @@ class JobsController < ApplicationController
 
 
   def index
-    @jobs = Job.search(params[:job]).page(params[:page])
+
+    if params[:sort]
+      @jobs = Job.search(params[:job]).reorder(params[:sort]).page(params[:page])
+    else
+      @jobs = Job.search(params[:job]).page(params[:page])
+    end
+
+    if request.xhr?
+      render "index", layout: false
+    end
   end
 
 
