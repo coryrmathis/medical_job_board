@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%=favicon_link_tag "favicon2.ico"%>
+    <title>AllPhysicianCareers</title>
+    <%= csrf_meta_tags %>
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:800|Jaldi:400,700|Open+Sans+Condensed:300,700" rel="stylesheet">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div id="app-container">
+      <div id="nav-main" class="ocean-breeze">
+        <div id="brand"><%=link_to("AllPhysicianCareers", "/")%> <%=fa_icon("heartbeat")%></div>
+      </div>
+      <div id="main-content-container">
+        <%=render "main/contact"%>
+        <%if alert%>
+          <aside class="alert alert-warning" id="alert"><%= alert %></aside>
+        <%elsif notice%>
+          <aside class="alert alert-info" id="notice"><%= notice %></aside>
+        <%end%>
+        <%= yield %>
+      </div>
+      
+    </div>
+    
+  </body>
+</html>

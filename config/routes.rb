@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   get "/cities/:state", to: "misc#cities"
+  get "/jobs/:id/description", to: "jobs#description_only"
   resources :jobs, only: [:show, :index]
 
   resources :applications, only: [:create]
