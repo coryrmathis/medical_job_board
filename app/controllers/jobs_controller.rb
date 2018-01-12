@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-
+  layout "no_links_in_header", only: [:description_only]
 
   def index
 
@@ -16,6 +16,12 @@ class JobsController < ApplicationController
 
 
   def show
+  
+    @job = Job.find_by(id: params[:id]) || Job.find_by(aid: params[:id])
+    render 'errors/job_unavailable' if !@job
+  end
+
+  def description_only
   
     @job = Job.find_by(id: params[:id]) || Job.find_by(aid: params[:id])
     render 'errors/job_unavailable' if !@job
