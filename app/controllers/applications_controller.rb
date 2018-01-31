@@ -21,7 +21,8 @@ class ApplicationsController < ApplicationController
       :citizenship,
       :job_id,
       :comments,
-      :cv
+      :cv,
+      :phone_number
     )
   end
 end
