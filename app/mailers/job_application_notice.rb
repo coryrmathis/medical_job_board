@@ -1,6 +1,7 @@
 class JobApplicationNotice < ApplicationMailer
   default from: ENV["GMAIL_USERNAME"]
 
+
   def recruiter_notice(application_id)
     @application = Application.find(application_id)
     @job = @application.job
