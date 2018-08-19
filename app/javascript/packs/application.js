@@ -7,11 +7,13 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-function importAll (r) {
-  r.keys().forEach(r);
-}
+// If we wanted webpacker to replace sprockets, we could move all js files to
+// 'app/javascript/src/js/' and uncomment the following:
+// function importAll (r) {
+//   r.keys().forEach(r);
+// }
+// importAll(require.context('../src/js/', true, /\.js$/));
 
 console.log('Hello World from Webpacker');
 
 import 'bootstrap/dist/js/bootstrap';
-importAll(require.context('../src/js/', true, /\.js$/));
