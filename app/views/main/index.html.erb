@@ -4,7 +4,7 @@
     <h3>Search Jobs</h3>
     <div>
       <form method="GET" action="/jobs">
-        <div class="form-group">
+        <div class="input-group">
           <select name="job[specialty]" class="form-control">
               <option value="">Specialty</option>
             <%=@specialties.each do |specialty|%>
@@ -17,7 +17,7 @@
           </select>
         </div>
         <form>
-        <div class="form-group">
+        <div class="input-group">
           <select id="state-dropdown" name="job[state]" class="form-control">
               <option value="">State</option>
               <%CS.states(:us).each do |key, value|%>
@@ -25,11 +25,11 @@
               <%end%>
           </select>
         </div>
-        <div class="form-group">
+        <div class="input-group">
           <input type="text" name="job[city]" placeholder="City" class="form-control">
         </div>
         <h4>Visas</h4>
-        <div class="form-group visas-radio">
+        <div class="input-group visas-radio">
           <div class="radio-inline">
             <input checked type="radio" name="job[visas]" value="">None
           </div>
@@ -40,10 +40,10 @@
             <input type="radio" name="job[visas]" value="h1">H1
           </div>
         </div>
-        <div class="form-group">
+        <div class="input-group">
           <input type="text" name="job[subspecialty_keywords]" placeholder="Subspecialties/Keywords" class="form-control">
         </div>
-        <div class="form-group">
+        <div class="input-group">
           <input class="btn" type="submit" value="Search">
         </div>
       </form>

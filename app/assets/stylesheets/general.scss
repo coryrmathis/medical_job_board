@@ -1,3 +1,109 @@
+// To make consistent w/ Bootstrap 3
+body {
+  font-size: 14px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+a{
+  color: rgb(51, 122, 183);
+  cursor: pointer;
+}
+
+h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.form-control {
+  font-size: 14px;
+}
+// End Bootstrap 3 consistency changes
+
+// Kaminari
+.paginator-conatiner{
+  display: flex;
+  justify-content: center;
+}
+.pagination a, .pagination span.current, .pagination span.gap {
+  float: left;
+  padding: 5px 10px;
+  line-height: 1.5;
+  text-decoration: none;
+  background-color: white;
+  &:hover{
+    background-color: lightgray;
+  }
+}
+
+.pagination {
+  display: inline-flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  
+  a{
+    border: 1px solid #DDD;
+    border-left: 0px;
+  }
+
+  li:last-child a{
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  li:first-child a{
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-left: 1px solid #DDD;;
+  }
+
+  .first{
+      padding : 0;
+      float: none;
+      border: none;
+  }
+  .prev {
+      padding : 0;
+      float: none;
+      border: none;
+  }
+  .page{
+      padding : 0;
+      float: none;
+      border: none;
+  }
+  .next{
+      padding : 0;
+      float: none;
+      border: none;
+  }
+  .last{
+      padding : 0;
+      float: none;
+      border: none;
+  }
+  .active{
+    a {
+      background-color:rgb(51, 122, 183);
+      color: white;
+      border-color: rgb(51, 122, 183);
+      &:hover{
+        color: white;
+      }
+    }
+  }
+  .disabled{
+    cursor: not-allowed;
+    a:hover{
+      background-color: white;
+    }
+  }
+}
+
+// End Kaminari
+
+
 thead {
   font-weight: bold;
 }
@@ -58,6 +164,7 @@ thead {
   a {
   color: white;
   text-decoration: none;
+  background: transparent;
 
   &:hover{ 
     color: white;

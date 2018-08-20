@@ -92,4 +92,15 @@
     border-color: #eac79d;
   }
 
+  .input-group{
+    margin-bottom: 15px;
+    justify-content: center;
+    .radio-inline{
+      margin: 10px;
+      input{
+        margin-right: 5px;
+      }
+    }
+  }
+
 }
