@@ -12,14 +12,20 @@
 
   <body>
     <div id="app-container">
-      <div id="nav-main" class="ocean-breeze">
+      <div id="nav-main" class="nav ocean-breeze">
         <div id="brand"><%=link_to("AllPhysicianCareers", "/")%> <%=fa_icon("heartbeat")%></div>
         <a class="nav-main-links" href="/">Search</a>
         <a class="nav-main-links" data-toggle="modal" data-target="#contactInformationModal">Contact</a>
-        <a class="nav-main-links" href="/">Sign In</a>
-        <!-- <a class="nav-main-links" href="/about">About</a> -->
+        <div class="nav-right">
+          <% if user_signed_in? %>
+            <%= link_to current_user.email, edit_user_registration_path %>
+            <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-main-links sign-in-link" %>
+          <% else%>
+            <%= link_to "Sign In", new_user_session_path, class: "nav-main-links sign-in-link"%>
+          <% end %>
+        </div>
       </div>
-      <div id="main-content-container">
+      <div id="main-content-container" class="container-fluid">
         <%=render "main/contact"%>
         <%if alert%>
           <aside class="alert alert-warning" id="alert"><%= alert %></aside>

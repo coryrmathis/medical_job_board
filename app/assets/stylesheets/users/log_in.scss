@@ -1,0 +1,10 @@
+.box-form-container{
+  .remember-me{
+    flex-direction: row;
+    align-items: center;
+    label {
+      margin-bottom: 0;
+      margin-left: 4px;
+    }
+  }
+}

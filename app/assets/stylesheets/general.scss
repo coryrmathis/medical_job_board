@@ -20,7 +20,7 @@ h3 {
 }
 // End Bootstrap 3 consistency changes
 
-// Kaminari
+// Kaminari fixes for Bootstrap 4
 .paginator-conatiner{
   display: flex;
   justify-content: center;
@@ -101,8 +101,7 @@ h3 {
   }
 }
 
-// End Kaminari
-
+// End Kaminari fixes
 
 thead {
   font-weight: bold;
@@ -156,11 +155,64 @@ thead {
   text-align: center;
 }
 
-#main-content-container{
+.box-form-page{
   padding-top: 6%;
 }
 
+.box-form-container{
+  background-color: $box-bg-color;
+  border: 1px solid $box-border-color;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 15px;
+  h3{
+    text-align: center;
+    font-weight: 200;
+  }
+}
+.box-form {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  .field{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 4px;
+    input{
+      margin-top: 2px;
+    }
+    label{
+      margin-bottom: 0;
+    }
+  }
+  input[type='submit']{
+    display: block;
+    margin: 0 auto;
+    border: solid #c0c0c0 .1em;
+  }
+
+  input[type='submit']:hover{
+    background-color: #dda864;
+    color: white;
+    border-color: #eac79d;
+  }
+}
+
+#main-content-container{
+  padding-top: 75px;
+}
+
 #nav-main{
+  height: 75px;
+  align-items: center;
   a {
   color: white;
   text-decoration: none;
@@ -183,7 +235,10 @@ thead {
     &:visited{ 
       color: white;
       text-decoration: none;
-    }
+    }    
+  }
+  .nav-right{
+    margin-left: auto;
   }
 }
 
