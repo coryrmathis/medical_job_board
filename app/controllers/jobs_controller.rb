@@ -26,11 +26,12 @@ class JobsController < ApplicationController
       #Handle AJAX
       render json: { 
         error: flash[:error],
-        content: ActionController::Base.helpers.sanitize(
-          render_to_string(partial: 'job_panel', locals: {job: @job}, layout: false),
-          tags: %w(strong em a div h1 button ul li p hr),
-          attributes: %w(href class id data-toggle data-target)
-        )
+        content: render_to_string(partial: 'job_panel', locals: {job: @job}, layout: false)
+        # content: ActionController::Base.helpers.sanitize(
+        #   render_to_string(partial: 'job_panel', locals: {job: @job}, layout: false),
+        #   tags: %w(strong em a div h1 button ul li p hr),
+        #   attributes: %w(href class id data-toggle data-target)
+        # )
       }
     else 
       render 'errors/job_unavailable' if !@job
