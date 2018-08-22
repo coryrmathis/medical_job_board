@@ -208,6 +208,7 @@ thead {
 
 #main-content-container{
   padding-top: 75px;
+  padding-bottom: 20px;
 }
 
 #nav-main{
@@ -239,6 +240,9 @@ thead {
   }
   .nav-right{
     margin-left: auto;
+    .sign-in-link{
+      margin-left: 15px;
+    }
   }
 }
 

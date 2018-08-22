@@ -5,10 +5,31 @@
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class:'box-form'}) do |f| %>
         <%= devise_error_messages! %>
+        
+        <%= f.label "What would you like to do?" %>
+        <div class="user-type-toggle btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn active" id="applicant">
+            <input type="radio" name="options"autocomplete="off" checked value="applicant"> Apply for jobs
+          </label>
+          <label class="btn" id="poster">
+            <input type="radio" name="options"  autocomplete="off" value="poster"> Post jobs
+          </label>
+        </div>
+        <%= f.hidden_field :account_type %>
 
+       <div class="field">
+         <%= f.label :first_name %><br />
+         <%= f.text_field :first_name, autofocus: true %>
+       </div>
+
+       <div class="field">
+         <%= f.label :last_name %><br />
+         <%= f.text_field :last_name %>
+       </div>
+       
         <div class="field">
           <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true %>
+          <%= f.email_field :email %>
         </div>
 
         <div class="field">

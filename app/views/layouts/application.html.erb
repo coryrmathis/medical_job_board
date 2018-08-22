@@ -8,13 +8,15 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application' %>
+    <%= javascript_pack_tag 'job_description' %>
   </head>
 
   <body>
     <div id="app-container">
       <div id="nav-main" class="nav ocean-breeze">
         <div id="brand"><%=link_to("AllPhysicianCareers", "/")%> <%=fa_icon("heartbeat")%></div>
-        <a class="nav-main-links" href="/">Search</a>
+        <a class="nav-main-links" href="/">Search Jobs</a>
+        <%= link_to "Post a Job", jobs_new_path, class:"nav-main-links"%>
         <a class="nav-main-links" data-toggle="modal" data-target="#contactInformationModal">Contact</a>
         <div class="nav-right">
           <% if user_signed_in? %>

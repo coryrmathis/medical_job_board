@@ -1,36 +1,47 @@
-<div id="job-search-results">
-  <h1>Search Results: <%=@jobs.total_count%></h1>
-  <select class="form-control" id="job-index-sort-select" name="sort">
-    <option value="">Sort By</option>
-    <option value="specialty">Specialty</option>
-    <option value="city">City</option>
-    <option value="state">State</option>
-    <option value="visas">Visas</option>
-  </select>
-  <%=paginate @jobs%>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <td></td>
-        <td>Specialty</td>
-        <td>City</td>
-        <td>State</td>
-        <td>Visas</td>
-        <td>Distance To Metro</td>
-        <td>Additional Info</td>
-      </tr>
-    </thead>
-    <%@jobs.each_with_index do |job, i|%>
-      <tr>
-        <td><%=i + 1%></td>
-        <td><%=link_to job.specialty, job_path(job)%></td>
-        <td><%=job.city%></td>
-        <td><%=job.state%></td>
-        <td><%=job.visas%></td>
-        <td><%=job.distance_to_metro%></td>
-        <td><%=job.subspecialty_keywords%></td>
-      </tr>
-    <%end%>
-  </table>
+<div class="row">
+  <div class="col-md-6">
+    <div id="job-search-results">
+      <h1>Search Results: <%=@jobs.total_count%></h1>
+      <select class="form-control" id="job-index-sort-select" name="sort">
+        <option value="">Sort By</option>
+        <option value="specialty">Specialty</option>
+        <option value="city">City</option>
+        <option value="state">State</option>
+        <option value="visas">Visas</option>
+      </select>
+      <%=paginate @jobs%>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <td></td>
+            <td>Specialty</td>
+            <td>City</td>
+            <td>State</td>
+            <td>Visas</td>
+            <td>Distance To Metro</td>
+            <td>Additional Info</td>
+          </tr>
+        </thead>
+        <%@jobs.each_with_index do |job, i|%>
+          <tr data-job-id="<%= job.id %>">
+            <td><%=i + 1%></td>
+            <td><%=link_to job.specialty, job_path(job)%></td>
+            <td><%=job.city%></td>
+            <td><%=job.state%></td>
+            <td><%=job.visas%></td>
+            <td><%=job.distance_to_metro%></td>
+            <td><%=job.subspecialty_keywords%></td>
+          </tr>
+        <%end%>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <!-- "data" updated via ajax on click of job table -->
+    <div id="job-description-container">
+      <h3>JOB DESCRIPTION</h3>
+      <p>Click on a job to see a description and apply!</p>
+      <p>[REACT PANEL HERE]</p>
+    </div>
+  </div>
 </div>
-
