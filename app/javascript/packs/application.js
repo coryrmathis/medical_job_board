@@ -9,11 +9,13 @@
 
 // If we wanted webpacker to replace sprockets, we could move all js files to
 // 'app/javascript/src/js/' and uncomment the following:
+//
 // function importAll (r) {
 //   r.keys().forEach(r);
 // }
 // importAll(require.context('../src/js/', true, /\.js$/));
 
-console.log('Hello World from Webpacker');
+// to import individually, e.g.
+// import './hello_react.jsx';
 
 import 'bootstrap/dist/js/bootstrap';
