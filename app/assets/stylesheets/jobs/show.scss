@@ -11,21 +11,24 @@
   }
 }
 
-.panel-container {
-  padding: 2% 10%;
-
-  h1{
-    font-size: 2em;
-    text-align: center;
-  }
-
-  .panel-body{
-    padding: 5%;
-  }
-}
 
 .apply-btn {
   display: block;
   margin: 0 auto;
   margin-top: 20px;
+}
+
+#applicationModal{
+  .modal-header{
+    justify-content: space-between;
+    align-items: center;
+    .modal-title{
+      flex-grow: 1;
+      text-align: center;
+    }
+    .close{
+      margin: 0;
+      padding: 5px;
+    }
+  }
 }

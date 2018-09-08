@@ -13,28 +13,3 @@
   font-size: 1.2em;
   font-family: 'Jaldi', sans-serif;
 }
-
-.job-description-half{
-  display: flex;
-  justify-content: stretch;
-}
-
-#job-description-container{
-
-
-}
-.job-panel{
-  background: $ocean-mist;
-  border-top: 5px solid $ocean-breeze;
-  top: 0px;
-  bottom: 0px;
-  margin-top: 80px;
-  margin-bottom: 15px;
-  margin-right: 15px;
-  margin-left: 15px;
-  padding: 15px;
-  
-  position:fixed;
-  overflow-y:scroll;
-  overflow-x:hidden;
-}

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "/jobs/:id/description", to: "jobs#description_only"
   get '/jobs/new', to: 'jobs#new'
   resources :jobs, only: [:show, :index]
+  get '/jobs/dev/react_browser', to: 'jobs#react_browser'
 
   resources :applications, only: [:create]
 
