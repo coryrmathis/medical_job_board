@@ -65,7 +65,6 @@ class JobPanel extends React.Component {
 
   render(){
     if (this.props.jobData){
-      
       return(
         <div className="panel-contents">
           <div className="panel-header">
@@ -89,7 +88,12 @@ class JobPanel extends React.Component {
               </div>
               <div className="right">
                 <a className='btn btn-info fa fa-external-link' target="_blank" href={`/jobs/${this.props.jobData.raw.id}`} ></a>
-                <button className='btn btn-danger fa fa-times' onClick={function(){this.props.closeJobWindow()}} ></button>
+                <button
+                  className='btn btn-danger fa fa-times'
+                  onClick={function(){
+                    this.props.closeJobWindow()
+                  }.bind(this)} 
+                ></button>
               </div>
             </div>
             <div className="header-contents">
