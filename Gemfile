@@ -77,6 +77,9 @@ gem 'aws-sdk-s3', '~> 1'
 # Markdown -> HTML
 gem "redcarpet"
 
+# Markdown editor
+gem 'simplemde-rails'
+
 # Location info
 gem "city-state"
 
@@ -96,3 +99,5 @@ gem "devise"
 
 gem 'carrierwave', '~> 1.0'
 gem "fog-aws"
+
+

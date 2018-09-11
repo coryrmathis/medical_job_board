@@ -6,5 +6,6 @@ $ocean-mist: rgb(192, 213, 213);
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 @import "font-awesome";
-@import "**/*"
+@import "simplemde.min";
+@import "**/*";
 
