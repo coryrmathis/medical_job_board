@@ -128,9 +128,9 @@ $job-panel-transition-speed: 0.5s;
 
     table{
       display: table;
-      // border-top: 5px solid $ocean-breeze;
+      border-bottom: 5px solid $ocean-breeze;
       flex-shrink: 1;
-      // word-break: break-word !important;
+      margin-bottom: 0px;
       
       thead{
         tr{
@@ -148,22 +148,27 @@ $job-panel-transition-speed: 0.5s;
           background-color: $ocean-mist;
         }
         tr:hover{
-          background-color: $ocean-mist;
+          background-color: $ocean-mist-light;
         }
       }
     }
   }
 
   .load-more-btn{
+    margin-top: 10px;
     width: 100%;
     color: white;
     background-color: $ocean-breeze;
+    &:hover{
+      background-color: #dda864;
+    }
   }
 
   .end-of-results{
     padding-top: 10px;
     text-align: center;
-    background-color: $ocean-mist;
-    border-bottom: 5px solid $ocean-breeze;
+    color: white;
+    background-color: $ocean-breeze;
+    padding-bottom: 5px;
   }
 }
