@@ -12,7 +12,8 @@ class User < ApplicationRecord
   # == Extensions ===========================================================
   
   # == Relationships ========================================================
-  
+  has_many :saved_jobs
+  has_many :jobs, :through => :saved_jobs
   # == Validations ==========================================================
   validates :first_name, :last_name, :email, :account_type, presence: true
   validates :email, uniqueness: true
@@ -26,5 +27,10 @@ class User < ApplicationRecord
   # == Class Methods ========================================================
   
   # == Instance Methods =====================================================
-
+  def applicant?
+    self.account_type == 'applicant'
+  end
+  def poster?
+    self.account_type == 'poster'
+  end
 end

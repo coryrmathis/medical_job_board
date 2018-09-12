@@ -19,4 +19,4 @@
 // import './hello_react.jsx';
 
 import 'bootstrap/dist/js/bootstrap';
-import './job_browser.jsx';
+import './job_browser/job_browser.jsx';

@@ -38,7 +38,6 @@ class JobsController < ApplicationController
     end
   end
 
-
   def show
     @job = Job.find_by(id: params[:id]) || Job.find_by(aid: params[:id])
     render 'errors/job_unavailable' if !@job
@@ -46,7 +45,8 @@ class JobsController < ApplicationController
       if @job
         render json: {
           "raw": @job,
-          "markup": @job.job_description_markup
+          "markup": @job.job_description_markup,
+          "favorite": @job.users.include?(current_user)
         }.to_json
       else
         render json: {"description": "Job not found. We are sorry for the inconvenience."}.to_json

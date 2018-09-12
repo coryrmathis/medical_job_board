@@ -13,8 +13,12 @@ Rails.application.routes.draw do
   get '/jobs/new', to: 'jobs#new'
   resources :jobs, only: [:show, :index]
   get '/jobs/dev/react_browser', to: 'jobs#react_browser'
+  put '/users/:id', to: 'users#update'
 
   resources :applications, only: [:create]
+
+  # React-to-rails api
+  get "/api/react/method/", to: 'api/react#method_call'
 
   # Main Routes
   root "main#index"
