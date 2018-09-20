@@ -1,286 +1,15 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import JobPanel from './components/job_panel'
+import SearchPanel from './components/search_panel'
+import Table from './components/table'
 
-function TableRow(props) {
-  return(
-    <tr
-      onClick={function(){props.onSelect(props.rowData.id)}.bind(this)}
-      data-job-id={props.rowData.id}
-    >
-      <td>{props.row + 1}</td>
-      <td>{props.rowData.specialty}</td>
-      <td>{props.rowData.city}</td>
-      <td>{props.rowData.state}</td>
-      <td>{props.rowData.visas}</td>
-      <td>{props.rowData.distance_to_metro}</td>
-      <td>{props.rowData.subspecialty_keywords}</td>
-    </tr>
-  );
-}
-
-function Table(props) {
-  if (!props.allJobsData) {
-    return (
-      <div>
-      </div>
-    );
-  }
-  return (
-    <table className="table table-responsive">
-      <thead>
-        <tr>
-          <td>&#35;</td>
-          <td>Specialty</td>
-          <td>City</td>
-          <td>State</td>
-          <td>Visas</td>
-          <td>Distance To Metro</td>
-          <td>Additional Info</td>
-        </tr>
-      </thead>
-      <tbody>
-        {props.allJobsData.map(function (job, i) {
-          return (
-            <TableRow rowData={job} row={i} key={i} onSelect={props.onRowSelect}/>
-          );
-        })}
-      </tbody>
-    </table>
-  );
-}
-
-// function JobPanel(props) {
-//   if (props.jobData){
-//     var jobID = props.jobData.raw.id
-//     return(
-//       <div className="panel-contents">
-//         <div className="panel-header">
-//           <div className="panel-button-bar">
-//             <div className="left">
-//               <a className="favorite">
-//                 <i
-//                   className={props.jobData.favorite ? 'fa fa-star' : 'fa fa-star-o'}
-
-//                   onMouseEnter={function(e){
-//                     e.target.className = "fa fa-star-half-o";
-//                   }}
-
-//                   onMouseLeave={function(e){
-//                     e.target.className = props.jobData.favorite ? 'fa fa-star' : 'fa fa-star-o';
-//                   }}
-                  
-//                   onClick={props.handleFavoriteClick(jobID)}
-//                 ></i>
-//               </a>
-//             </div>
-//             <div className="right">
-//               <a className='btn btn-info fa fa-external-link' target="_blank" href={`/jobs/${jobID}`} ></a>
-//               <button
-//                 className='btn btn-danger fa fa-times'
-//                 onClick={function(){
-//                   props.closeJobWindow()
-//                 }} 
-//               ></button>
-//             </div>
-//           </div>
-//           <div className="header-contents">
-//             <div className="job-title">
-//               <h3>{props.jobData.raw.specialty}</h3>
-//             </div>
-//             <p>{props.jobData.raw.city}, {props.jobData.raw.state}</p>
-//             <button className="btn btn-success btn-lg apply-btn" data-toggle="modal" data-target="#applicationModal">Apply</button>
-//           </div>
-//         </div>
-//         <div className="description-container">
-//           <p dangerouslySetInnerHTML={{__html: props.jobData.markup}}></p>
-//         </div>
-//       </div>
-//     );
-//   } else {
-//     return(
-//       <div className="panel-contents">
-//         <div className="panel-header">
-//         <h3>No job selected</h3>
-//         </div>
-//         <div className="description-container">
-//           <p>Click a job to preview and apply.</p>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
-// class JobPanel extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       favorite: this.props.jobData.favorite,
-//       hover: false
-//     };
-//     this.FavoriteClass = this.FavoriteClass.bind(this);
-//     this.handleFavoriteClick = this.handleFavoriteClick.bind(this);
-//   }
-
-//   componentWillReceiveProps(nextProps){
-//     if (nextProps.jobData.favorite !== this.state.favorite) {
-//       this.setState({favorite: nextProps.jobData.favorite});
-//     }
-//   }
-
-//   FavoriteClass(){
-//     return this.state.favorite ? 'fa fa-star' : 'fa fa-star-o';
-//   }
-
-//   handleFavoriteClick(){
-//     // For Devise
-//     var token = $('meta[name="csrf-token"]').attr('content');
-//     // Change state prior to ajax to update view asap
-//     // Change will be undone if ajax fail
-//     this.state.favorite = !this.state.favorite;
-//     this.setState(this.state);
-
-//     $.ajax({
-//       url: '/users/' + this.props.userID,
-//       type: "PUT",
-//       beforeSend: function (xhr) {
-//           xhr.setRequestHeader('X-CSRF-Token', token)
-//       },
-//       data: {job_id: this.props.jobData.raw.id}
-//     }).then(
-//       function(){
-//         // success
-//       },
-//       function() {
-//         //fail, undo the view changes made at beginning of click handle
-//         this.state.favorite = !this.state.favorite;
-//         this.setState(this.state);
-//       }
-//     );
-//   }
-
-//   render(){
-//     if (this.props.jobData){
-//       return(
-//         <div className="panel-contents">
-//           <div className="panel-header">
-//             <div className="panel-button-bar">
-//               <div className="left">
-//                 <a className="favorite">
-//                   <i
-//                     className={this.FavoriteClass()}
-//                     onMouseEnter={function(e){
-//                       e.target.className = "fa fa-star-half-o";
-//                     }}
-//                     onMouseLeave={function(e){
-//                       e.target.className = this.FavoriteClass();
-//                     }.bind(this)}
-//                     onClick={this.handleFavoriteClick}
-//                   ></i>
-//                 </a>
-//               </div>
-//               <div className="right">
-//                 <a className='btn btn-info fa fa-external-link' target="_blank" href={`/jobs/${this.props.jobData.raw.id}`} ></a>
-//                 <button
-//                   className='btn btn-danger fa fa-times'
-//                   onClick={function(){
-//                     this.props.closeJobWindow()
-//                   }.bind(this)} 
-//                 ></button>
-//               </div>
-//             </div>
-//             <div className="header-contents">
-//               <div className="job-title">
-//                 <h3>{this.props.jobData.raw.specialty}</h3>
-//               </div>
-//               <p>{this.props.jobData.raw.city}, {this.props.jobData.raw.state}</p>
-//               <button className="btn btn-success btn-lg apply-btn" data-toggle="modal" data-target="#applicationModal">Apply</button>
-//             </div>
-//           </div>
-//           <div className="description-container">
-//             <p dangerouslySetInnerHTML={{__html: this.props.jobData.markup}}></p>
-//           </div>
-//         </div>
-//       );
-//     } else {
-//       return(
-//         <div className="panel-contents">
-//           <div className="panel-header">
-//           <h3>No job selected</h3>
-//           </div>
-//           <div className="description-container">
-//             <p>Click a job to preview and apply.</p>
-//           </div>
-//         </div>
-//       );
-//     }
-//   }
-// }
-
-function SearchPanel(props){
-  return(
-    <div className="search-panel">
-      <div className="title-bar">
-        <h3>Search Criteria</h3>
-      </div>
-      <div className="search-input-container">
-        <div className="input-group">
-          <select name="job[specialty]" className="form-control" onChange={function(event){props.onSpecialtyChange(event.target.value)}}>
-            <option value="">Specialty</option>
-            {props.specialties.map(function(specialty, i){
-              if(specialty === "Advanced Practice - ALL"){
-                return(
-                  <option key={i} value="%Advanced Practice%">
-                    {specialty}
-                  </option>
-                );
-              } else {
-                return(
-                  <option key={i} value={specialty}>
-                    {specialty}
-                  </option>
-                );
-              }
-            })}
-          </select>
-          <select id="state-dropdown" name="job[state]" className="form-control" onChange={function(event){props.onStateChange(event.target.value)}}>
-            <option value="">State</option>
-            {Object.keys(props.states).map(function(abbreviation, i){
-              return(
-                <option key={i} value={abbreviation}>{props.states[abbreviation]}</option>
-              );
-            })}
-          </select>
-        </div>
-        <div className="input-group">
-          <input type="text" name="job[city]" placeholder="City" className="form-control" onChange={function(event){props.onCityChange(event.target.value)}} />
-
-          <input type="text" name="job[subspecialty_keywords]" placeholder="Subspecialties/Keywords" className="form-control" onChange={function(event){props.onKeywordsChange(event.target.value)}} />
-        </div>
-        <div className="input-group visas-radio" onChange={function(event){props.onVisasChange(event.target.value)}}>
-          <h5>Permitted Visas:</h5>
-          <div className="radio-inline">
-            <input type="radio" name="job[visas]" value="" defaultChecked />None
-          </div>
-          <div className="radio-inline">
-            <input type="radio" name="job[visas]" value="j1" />J1
-          </div>
-          <div className="radio-inline">
-            <input type="radio" name="job[visas]" value="h1" />H1
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-class Application extends React.Component {
+class JobBrowser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       allJobsData: null,
       searchParams: {},
-      resultsPage: 1
+      resultsPage: 1,
     };
     this.onRowSelect = this.onRowSelect.bind(this);
     this.onSpecialtyChange = this.onSpecialtyChange.bind(this);
@@ -295,7 +24,9 @@ class Application extends React.Component {
 
   componentDidMount() {
     $.get(
-      "/jobs/",
+      this.props.savedJobsOnly ? 
+        "/users/" + this.props.userID + "/saved_jobs" : 
+        "/jobs/",
       function(data){
         this.setState({numRecentlyLoadedResults: data.length});
         this.state.allJobsData = data;
@@ -379,15 +110,19 @@ class Application extends React.Component {
     return (
       <div className="row">
         <div className="table-container">
-          <SearchPanel
-            specialties={this.props.specialties}
-            states={this.props.states}
-            onSpecialtyChange={this.onSpecialtyChange}
-            onStateChange={this.onStateChange}
-            onCityChange={this.onCityChange}
-            onKeywordsChange={this.onKeywordsChange}
-            onVisasChange={this.onVisasChange}
-          />
+          {this.props.savedJobsOnly ?
+            <div></div> :
+            <SearchPanel
+                specialties={this.props.specialties}
+                states={this.props.states}
+                onSpecialtyChange={this.onSpecialtyChange}
+                onStateChange={this.onStateChange}
+                onCityChange={this.onCityChange}
+                onKeywordsChange={this.onKeywordsChange}
+                onVisasChange={this.onVisasChange}
+            />
+          }
+          
           {
             this.state.numRecentlyLoadedResults === 0 ? 
             <div></div> :
@@ -415,15 +150,4 @@ class Application extends React.Component {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const node = document.getElementById('jobs-data');
-  if(node){
-    const specialties = JSON.parse(node.getAttribute('data-specialties'));
-    const states = JSON.parse(node.getAttribute('data-states'));
-    const userID = JSON.parse(node.getAttribute('data-user-id'));
-    ReactDOM.render(
-      <Application specialties={specialties} states={states} resultsPerPage={25}userID={userID}/>,
-      node.appendChild(document.createElement('div')),
-    );
-  }
-});
+export default JobBrowser;

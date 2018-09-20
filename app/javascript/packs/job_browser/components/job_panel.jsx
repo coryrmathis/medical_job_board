@@ -1,12 +1,14 @@
-import React from 'react'
+import React from 'react';
 
 class JobPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       favorite: this.props.jobData.favorite,
-      hover: false
+      hover: false,
+      savePopup: false
     };
+    this.PopupText = this.PopupText.bind(this);
     this.FavoriteClass = this.FavoriteClass.bind(this);
     this.handleFavoriteClick = this.handleFavoriteClick.bind(this);
   }
@@ -21,6 +23,10 @@ class JobPanel extends React.Component {
     return this.state.favorite ? 'fa fa-star' : 'fa fa-star-o';
   }
 
+  PopupText(){
+    return this.state.favorite ? 'Saved' : 'Removed';
+  }
+
   handleFavoriteClick(){
     // For Devise
     var token = $('meta[name="csrf-token"]').attr('content');
@@ -30,7 +36,7 @@ class JobPanel extends React.Component {
     this.setState(this.state);
 
     $.ajax({
-      url: '/users/' + this.props.userID,
+      url: '/users/' + this.props.userID + '/saved_jobs',
       type: "PUT",
       beforeSend: function (xhr) {
           xhr.setRequestHeader('X-CSRF-Token', token)
@@ -39,7 +45,15 @@ class JobPanel extends React.Component {
     }).then(
       function(){
         // success
-      },
+        console.log("successfully saved favorite status");
+        //bubble this up to main browser for list refresh if needed
+        this.props.handleFavoriteClick();
+        this.setState({savePopup: true});
+        window.setTimeout(() => {
+          this.setState({savePopup: false });
+        }, 1300);
+
+      }.bind(this),
       function() {
         //fail, undo the view changes made at beginning of click handle
         this.state.favorite = !this.state.favorite;
@@ -67,6 +81,10 @@ class JobPanel extends React.Component {
                     onClick={this.handleFavoriteClick}
                   ></i>
                 </a>
+                {this.state.savePopup ? 
+                  <div className="save-alert">{this.PopupText()}</div> : 
+                  <div className="save-alert hidden">{this.PopupText()}</div>
+                }
               </div>
               <div className="right">
                 <a className='btn btn-info fa fa-external-link' target="_blank" href={`/jobs/${this.props.jobData.raw.id}`} ></a>

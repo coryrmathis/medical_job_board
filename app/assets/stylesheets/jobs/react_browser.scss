@@ -1,5 +1,6 @@
 // Including margins
 $job-panel-width: 500px;
+
 $job-panel-transition-speed: 0.5s;
 
 .react-browser{
@@ -170,5 +171,39 @@ $job-panel-transition-speed: 0.5s;
     color: white;
     background-color: $ocean-breeze;
     padding-bottom: 5px;
+  }
+
+  .save-alert{
+    opacity: 1;
+    display: flex;
+    height: 25px;
+    align-self: center;
+    align-items: center;
+    margin-left: 5px;
+    text-align: center;
+    padding: 3px;
+    position: relative;
+    z-index: 999;
+    background-color: gold;
+    color: rgb(33, 37, 41);
+    font-weight: bold;
+    border-radius: 5px;
+    transition: opacity 500ms;
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 0;
+      height: 0;
+      border: 5px solid transparent;
+      border-right-color: gold;
+      border-left: 0;
+      margin-top: -5px;
+      margin-left: -5px;
+    }
+    &.hidden{
+      opacity: 0;
+    }
   }
 }

@@ -10,7 +10,8 @@
     "prop-types": "^15.6.2",
     "rails-ujs": "^5.2.1",
     "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "react-transition-group": "^2.4.0"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
