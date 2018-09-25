@@ -12,9 +12,8 @@ class User < ApplicationRecord
   # == Extensions ===========================================================
   
   # == Relationships ========================================================
-  has_many :saved_jobs
-  # has_many :jobs, :through => :saved_jobs
-  has_many :favorites, :through => :saved_jobs, :source => :job
+  has_many :job_saves
+  has_many :saved_jobs, :through => :job_saves, :source => :job
   # == Validations ==========================================================
   validates :first_name, :last_name, :email, :account_type, presence: true
   validates :email, uniqueness: true

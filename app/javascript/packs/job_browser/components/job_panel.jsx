@@ -4,7 +4,7 @@ class JobPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      favorite: this.props.jobData.favorite,
+      savedJob: this.props.jobData.savedJob,
       hover: false,
       savePopup: false
     };
@@ -14,17 +14,17 @@ class JobPanel extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if (nextProps.jobData.favorite !== this.state.favorite) {
-      this.setState({favorite: nextProps.jobData.favorite});
+    if (nextProps.jobData.savedJob !== this.state.savedJob) {
+      this.setState({savedJob: nextProps.jobData.savedJob});
     }
   }
 
   FavoriteClass(){
-    return this.state.favorite ? 'fa fa-star' : 'fa fa-star-o';
+    return this.state.savedJob ? 'fa fa-star' : 'fa fa-star-o';
   }
 
   PopupText(){
-    return this.state.favorite ? 'Saved' : 'Removed';
+    return this.state.savedJob ? 'Saved' : 'Removed';
   }
 
   handleFavoriteClick(){
@@ -33,7 +33,7 @@ class JobPanel extends React.Component {
     var token = $('meta[name="csrf-token"]').attr('content');
     // Change state prior to ajax to update view asap
     // Change will be undone if ajax fail
-    this.state.favorite = !this.state.favorite;
+    this.state.savedJob = !this.state.savedJob;
     this.setState(this.state);
 
     $.ajax({
@@ -46,7 +46,7 @@ class JobPanel extends React.Component {
     }).then(
       // Success
       function(){
-        console.log("successfully saved favorite status");
+        console.log("successfully saved savedJob status");
         // bubble this up to main browser for any higher level action
         this.props.handleFavoriteClick();
         // animate lil popup notification
@@ -60,7 +60,7 @@ class JobPanel extends React.Component {
       // Failure
       function() {
         // Undo the view changes made at beginning of click handle
-        this.state.favorite = !this.state.favorite;
+        this.state.savedJob = !this.state.savedJob;
         this.setState(this.state);
       }.bind(this)
 

@@ -32,7 +32,7 @@ class SavedBrowser extends React.Component {
   }
 
   handleFavoriteClick() {
-    this.state.jobData.favorite = !this.state.jobData.favorite;
+    this.state.jobData.savedJob = !this.state.jobData.savedJob;
     this.setState(this.state);
   }
 

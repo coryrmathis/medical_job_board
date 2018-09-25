@@ -14,4 +14,6 @@
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   # inflect.acronym 'RESTful'
   inflect.acronym 'CV'
+  inflect.plural 'safe', 'safes'
+  inflect.singular 'saves', 'save'
 end

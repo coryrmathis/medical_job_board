@@ -45,7 +45,7 @@ class JobsController < ApplicationController
         render json: {
           "raw": @job,
           "markup": @job.job_description_markup,
-          "favorite": @job.users.include?(current_user)
+          "savedJob": @job.interested_users.include?(current_user)
         }.to_json
       else
         render json: {"description": "Job not found. We are sorry for the inconvenience."}.to_json

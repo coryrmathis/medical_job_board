@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def saved_jobs
     user = User.find(params[:id])
-    jobs = user.favorites.page(params[:page])
+    jobs = user.saved_jobs.page(params[:page])
     if request.xhr?
       jobs_table_data = []
       jobs.each do |job|
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       render json: jobs_table_data.to_json
       return
     else
-      @jobs = user.favorites
+      @jobs = user.saved_jobs
     end
   end
 
@@ -31,10 +31,10 @@ class UsersController < ApplicationController
       if params[:job_id]
         puts "updating saved jobs"
         job = Job.find(params[:job_id])
-        if user.favorites.include? job
-          user.favorites.delete job
+        if user.saved_jobs.include? job
+          user.saved_jobs.delete job
         else
-          user.favorites << job
+          user.saved_jobs << job
         end
       end
     end

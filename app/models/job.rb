@@ -1,7 +1,7 @@
 class Job < ApplicationRecord
   has_many :applications
-  has_many :saved_jobs
-  has_many :users, :through => :saved_jobs
+  has_many :job_saves
+  has_many :interested_users, :through => :job_saves, :source => :user
 
   validates :specialty, presence: true
 
