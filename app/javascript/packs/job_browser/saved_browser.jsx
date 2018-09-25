@@ -21,45 +21,45 @@ class SavedBrowser extends React.Component {
   }
 
   refreshList() {
-    $.get(
-      "/users/" + this.props.userID + "/saved_jobs" ,
-      function(data){
-        this.setState({numRecentlyLoadedResults: data.length});
-        this.state.allJobsData = data;
-        this.setState(this.state);
-      }.bind(this)
-    );
+    $.get({
+      cache: false,
+      url: "/users/" + this.props.userID + "/saved_jobs"
+    }).then(function(data){
+      this.setState({numRecentlyLoadedResults: data.length});
+      this.state.allJobsData = data;
+      this.setState(this.state);
+    }.bind(this));
   }
 
   handleFavoriteClick() {
-    this.refreshList();
     this.state.jobData.favorite = !this.state.jobData.favorite;
     this.setState(this.state);
   }
 
   onRowSelect(id) {
-    $.get(
-      "/jobs/" + id,
-      function(data) {
-        this.state.jobData = data;
-        this.setState(this.state);
-      }.bind(this)
-    );
+    $.get({
+      cache: false,
+      url: "/jobs/" + id,
+    }).then(function(data){
+      this.state.jobData = data;
+      this.setState(this.state);
+    }.bind(this));
   }
 
   loadMoreResults() {
     console.log(this.state.resultsPage);
     this.state.resultsPage += 1;
     this.setState(this.state);
-    $.get(
-      "/users/" + this.props.userID + "/saved_jobs",
-      {"page": this.state.resultsPage},
-      function(data){
-        this.setState({numRecentlyLoadedResults: data.length});
-        this.state.allJobsData = this.state.allJobsData.concat(data);
-        this.setState(this.state);
-      }.bind(this)
-    );
+
+    $.get({
+      cache: false,
+      url: "/users/" + this.props.userID + "/saved_jobs",
+      data: {"page": this.state.resultsPage}
+    }).then(function(data){
+      this.setState({numRecentlyLoadedResults: data.length});
+      this.state.allJobsData = this.state.allJobsData.concat(data);
+      this.setState(this.state);
+    }.bind(this));
   }
 
   closeJobWindow() {
@@ -70,14 +70,17 @@ class SavedBrowser extends React.Component {
     return (
       <div className="row">
         <div className="table-container">
+          <div class="saved-jobs-title">
+              <h1>Your Saved Jobs</h1>
+          </div>
           {
             this.state.numRecentlyLoadedResults === 0 ? 
-            <div></div> :
-            <Table allJobsData={this.state.allJobsData} onRowSelect={this.onRowSelect}/>
+              null :
+              <Table allJobsData={this.state.allJobsData} onRowSelect={this.onRowSelect}/>
           }
           {
             this.state.numRecentlyLoadedResults < this.props.resultsPerPage ?
-              <div></div> : 
+              null : 
               <button className="btn load-more-btn" onClick={this.loadMoreResults}>Load More Jobs</button>
           }
         </div>

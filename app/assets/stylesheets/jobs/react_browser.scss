@@ -137,6 +137,10 @@ $job-panel-transition-speed: 0.5s;
         tr{
           background-color: $ocean-breeze;
           color: white;
+          td{
+            border: none;
+          }
+
         }
       }
       td{
@@ -204,6 +208,17 @@ $job-panel-transition-speed: 0.5s;
     }
     &.hidden{
       opacity: 0;
+    }
+  }
+
+  .saved-jobs-title{
+    color: white;
+    background-color: $ocean-breeze;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 10px;
+    h1{
+      margin: 0;
     }
   }
 }

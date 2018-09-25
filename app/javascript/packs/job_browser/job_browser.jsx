@@ -23,26 +23,24 @@ class JobBrowser extends React.Component {
   }
 
   componentDidMount() {
-    $.get(
-      this.props.savedJobsOnly ? 
-        "/users/" + this.props.userID + "/saved_jobs" : 
-        "/jobs/",
-      function(data){
-        this.setState({numRecentlyLoadedResults: data.length});
-        this.state.allJobsData = data;
-        this.setState(this.state);
-      }.bind(this)
-    );
+    $.get({
+      cache: false,
+      url: "/jobs/",
+    }).then(function(data){
+      this.setState({numRecentlyLoadedResults: data.length});
+      this.state.allJobsData = data;
+      this.setState(this.state);
+    }.bind(this));
   }
 
   onRowSelect(id) {
-    $.get(
-      "/jobs/" + id,
-      function(data) {
-        this.state.jobData = data;
-        this.setState(this.state);
-      }.bind(this)
-    );
+    $.get({
+      cache: false,
+      url: "/jobs/" + id,
+    }).then(function(data){
+      this.state.jobData = data;
+      this.setState(this.state);
+    }.bind(this));
   }
 
   onSpecialtyChange(newSpecialty) {
@@ -77,29 +75,30 @@ class JobBrowser extends React.Component {
 
   search() {
     this.setState({resultsPage: 1});
-    $.get(
-      "/jobs/",
-      {"job": this.state.searchParams},
-      function(data){
-        this.setState({numRecentlyLoadedResults: data.length});
-        this.setState({allJobsData: data});
-      }.bind(this)
-    );
+    $.get({
+      cache: false,
+      url: "/jobs/",
+      data: {"job": this.state.searchParams}
+    }).then(function(data){
+      this.setState({numRecentlyLoadedResults: data.length});
+      this.setState({allJobsData: data});
+    }.bind(this));
   }
 
   loadMoreResults() {
     console.log(this.state.resultsPage);
     this.state.resultsPage += 1;
     this.setState(this.state);
-    $.get(
-      "/jobs/",
-      {"page": this.state.resultsPage, "job": this.state.searchParams},
-      function(data){
-        this.setState({numRecentlyLoadedResults: data.length});
-        this.state.allJobsData = this.state.allJobsData.concat(data);
-        this.setState(this.state);
-      }.bind(this)
-    );
+
+    $.get({
+      cache: false,
+      url: "/jobs/",
+      data: {"page": this.state.resultsPage, "job": this.state.searchParams}
+    }).then(function(data){
+      this.setState({numRecentlyLoadedResults: data.length});
+      this.state.allJobsData = this.state.allJobsData.concat(data);
+      this.setState(this.state);
+    }.bind(this));
   }
 
   closeJobWindow() {

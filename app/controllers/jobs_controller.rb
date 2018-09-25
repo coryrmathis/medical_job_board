@@ -1,14 +1,13 @@
 class JobsController < ApplicationController
   layout "no_links_in_header", only: [:description_only]
+  before_action :validate_user, only: [:new, :react_browser]
 
   def new
-    unless user_signed_in?
-      redirect_to new_user_session_path and return
-    end
   end
 
   def index
     if request.xhr?
+      # original xhr behavior, to ask cory: are there external services that need this behavior?
       # render "index", layout: false
       if params[:job]
         jobs = Job.search(params[:job]).page(params[:page])
@@ -29,12 +28,12 @@ class JobsController < ApplicationController
       end
       render json: jobs_table_data.to_json
       return
-    end
-
-    if params[:sort]
-      @jobs = Job.search(params[:job]).reorder(params[:sort]).page(params[:page])
     else
-      @jobs = Job.search(params[:job]).page(params[:page])
+      if params[:sort]
+        @jobs = Job.search(params[:job]).reorder(params[:sort]).page(params[:page])
+      else
+        @jobs = Job.search(params[:job]).page(params[:page])
+      end
     end
   end
 
@@ -54,22 +53,16 @@ class JobsController < ApplicationController
     end
   end
 
-  def react_browser
-    if params[:sort]
-      jobs = Job.search(params[:job]).reorder(params[:sort]).page(params[:page])
-    else
-      jobs = Job.all.page(params[:page])
-      # Just using all jobs for now while testing
-    end
-
-    if request.xhr?
-      render "index", layout: false
-    end
-  end
-
   def description_only
     @job = Job.find_by(id: params[:id]) || Job.find_by(aid: params[:id])
     render 'errors/job_unavailable' if !@job
+  end
+
+  private
+  def validate_user
+    unless user_signed_in?
+      redirect_to new_user_session_path and return
+    end
   end
   
 end

@@ -29,6 +29,7 @@ class JobPanel extends React.Component {
 
   handleFavoriteClick(){
     // For Devise
+    // This allows authenticates so ajax call can update current user
     var token = $('meta[name="csrf-token"]').attr('content');
     // Change state prior to ajax to update view asap
     // Change will be undone if ajax fail
@@ -43,22 +44,26 @@ class JobPanel extends React.Component {
       },
       data: {job_id: this.props.jobData.raw.id}
     }).then(
+      // Success
       function(){
-        // success
         console.log("successfully saved favorite status");
-        //bubble this up to main browser for list refresh if needed
+        // bubble this up to main browser for any higher level action
         this.props.handleFavoriteClick();
+        // animate lil popup notification
         this.setState({savePopup: true});
         window.setTimeout(() => {
           this.setState({savePopup: false });
         }, 1300);
 
       }.bind(this),
+
+      // Failure
       function() {
-        //fail, undo the view changes made at beginning of click handle
+        // Undo the view changes made at beginning of click handle
         this.state.favorite = !this.state.favorite;
         this.setState(this.state);
-      }
+      }.bind(this)
+
     );
   }
 
