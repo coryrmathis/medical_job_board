@@ -23,7 +23,7 @@
             <%= link_to "Applications", '#', class:"nav-main-links" %>
           <% end %>
           <% if current_user.poster? %>
-            <%= link_to "Posted Jobs", "#", class:"nav-main-links" %>
+            <%= link_to "Posted Jobs", posted_jobs_path(current_user), class:"nav-main-links" %>
           <% end %>
         <% end %>
         <div class="nav-right">
