@@ -1,13 +1,13 @@
 class JobsController < ApplicationController
   layout "no_links_in_header", only: [:description_only]
-  before_action :user_is_poster?, only: [:new]
+  before_action :user_is_poster?, only: [:new, :create]
 
   def new
     @job = Job.new
   end
 
   def create
-    job = Job.new(job_params)
+    job = current_user.created_jobs.new(job_params)
     job.job_description = ActionController::Base.helpers.sanitize(job.job_description)
     if job.save
       redirect_to job_path job
