@@ -26,5 +26,10 @@ class User < ApplicationRecord
   # == Class Methods ========================================================
   
   # == Instance Methods =====================================================
-
+  def applicant?
+    self.account_type == 'applicant'
+  end
+  def poster?
+    self.account_type == 'poster'
+  end
 end
