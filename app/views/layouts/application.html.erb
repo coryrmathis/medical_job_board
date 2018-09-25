@@ -17,6 +17,15 @@
         <a class="nav-main-links" href="/">Search Jobs</a>
         <%= link_to "Post a Job", jobs_new_path, class:"nav-main-links"%>
         <a class="nav-main-links" data-toggle="modal" data-target="#contactInformationModal">Contact</a>
+        <% if user_signed_in? %>
+          <% if current_user.applicant? %>
+            <%= link_to "Saved Jobs", saved_jobs_path(current_user), class:"nav-main-links" %>
+            <%= link_to "Applications", '#', class:"nav-main-links" %>
+          <% end %>
+          <% if current_user.poster? %>
+            <%= link_to "Posted Jobs", "#", class:"nav-main-links" %>
+          <% end %>
+        <% end %>
         <div class="nav-right">
           <% if user_signed_in? %>
             <%= link_to current_user.email, edit_user_registration_path %>
