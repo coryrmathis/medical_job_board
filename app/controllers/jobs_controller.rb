@@ -7,7 +7,7 @@ class JobsController < ApplicationController
   end
 
   def create
-    job = current_user.created_jobs.new(job_params)
+    job = current_user.posted_jobs.new(job_params)
     job.job_description = ActionController::Base.helpers.sanitize(job.job_description)
     if job.save
       redirect_to job_path job

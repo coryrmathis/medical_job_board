@@ -12,7 +12,7 @@ class User < ApplicationRecord
   # == Extensions ===========================================================
   
   # == Relationships ========================================================
-  has_many :created_jobs, class_name: "Job"
+  has_many :posted_jobs, class_name: "Job"
   # == Validations ==========================================================
   validates :first_name, :last_name, :email, :account_type, presence: true
   validates :email, uniqueness: true
