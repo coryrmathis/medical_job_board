@@ -1,4 +1,5 @@
 import React from 'react';
+import ApplicationModal from './application_modal';
 
 class JobPanel extends React.Component {
   constructor(props) {
@@ -6,10 +7,10 @@ class JobPanel extends React.Component {
     this.state = {
       savedJob: this.props.jobData.savedJob,
       hover: false,
-      savePopup: false
+      savePopup: false,
     };
-    this.PopupText = this.PopupText.bind(this);
-    this.FavoriteClass = this.FavoriteClass.bind(this);
+    this.popupText = this.popupText.bind(this);
+    this.favoriteClass = this.favoriteClass.bind(this);
     this.handleFavoriteClick = this.handleFavoriteClick.bind(this);
   }
 
@@ -19,11 +20,12 @@ class JobPanel extends React.Component {
     }
   }
 
-  FavoriteClass(){
+
+  favoriteClass(){
     return this.state.savedJob ? 'fa fa-star' : 'fa fa-star-o';
   }
 
-  PopupText(){
+  popupText(){
     return this.state.savedJob ? 'Saved' : 'Removed';
   }
 
@@ -74,24 +76,24 @@ class JobPanel extends React.Component {
           <div className="panel-header">
             <div className="panel-button-bar">
               <div className="left">
-                {this.props.accountType !== "applicant" ?
+                {this.props.accountType === "poster" ?
                   null :
                   <a className="favorite">
                     <i
-                      className={this.FavoriteClass()}
+                      className={this.favoriteClass()}
                       onMouseEnter={function(e){
                         e.target.className = "fa fa-star-half-o";
                       }}
                       onMouseLeave={function(e){
-                        e.target.className = this.FavoriteClass();
+                        e.target.className = this.favoriteClass();
                       }.bind(this)}
                       onClick={this.handleFavoriteClick}
                     ></i>
                   </a>
                 }
                 {this.state.savePopup ? 
-                  <div className="save-alert">{this.PopupText()}</div> : 
-                  <div className="save-alert hidden">{this.PopupText()}</div>
+                  <div className="save-alert">{this.popupText()}</div> : 
+                  <div className="save-alert hidden">{this.popupText()}</div>
                 }
                 
               </div>
@@ -110,7 +112,7 @@ class JobPanel extends React.Component {
                 <h3>{this.props.jobData.raw.specialty}</h3>
               </div>
               <p>{this.props.jobData.raw.city}, {this.props.jobData.raw.state}</p>
-              <button className="btn btn-success btn-lg apply-btn" data-toggle="modal" data-target="#applicationModal">Apply</button>
+              <button className="btn btn-success btn-lg apply-btn" onClick={ this.props.handleModalOpen }> Apply </button>
             </div>
           </div>
           <div className="description-container">

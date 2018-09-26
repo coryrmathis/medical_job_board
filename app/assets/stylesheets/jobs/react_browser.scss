@@ -24,6 +24,7 @@ $job-panel-transition-speed: 0.5s;
     }
 
     .panel-contents{
+      max-width: 100%;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
@@ -220,5 +221,10 @@ $job-panel-transition-speed: 0.5s;
     h1{
       margin: 0;
     }
+  }
+
+  .application-modal{
+    background-color: rgba(0, 0, 0, 0.372);
+    display: block;
   }
 }
