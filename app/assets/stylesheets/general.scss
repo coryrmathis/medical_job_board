@@ -171,7 +171,7 @@ thead {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-bottom: 15px;
+  margin-bottom: 15px;
   .box-title-bar{
     text-align: center;
     align-self: stretch;
@@ -184,8 +184,14 @@ thead {
     text-align: center;
     font-weight: 200;
   }
+  hr{
+    width: 100%;
+    color: $ocean-breeze;
+    border: 5px solid $ocean-breeze;
+  }
 }
 .box-form {
+  width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -204,11 +210,14 @@ thead {
       margin-bottom: 0;
     }
   }
+
+  .submit-controls{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
   input[type='submit']{
-    
-    display: block;
-    margin: 0 auto;
-    margin-top: 10px;
     border: solid #c0c0c0 .1em;
   }
 
@@ -216,6 +225,26 @@ thead {
     background-color: #dda864;
     color: white;
     border-color: #eac79d;
+  }
+}
+
+.box-footer{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  background-color: $ocean-breeze;
+  a{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    flex: 1;
+    text-align: center;
+    color: white;
+    &:hover{
+      color: $ocean-breeze;
+      text-decoration: none;
+      background-color: $ocean-mist;
+    }
   }
 }
 
