@@ -1,4 +1,21 @@
-<h1>Your Posted Jobs</h1>
-<% @jobs.each do |job| %>
-  <%= job.specialty %>
-<% end %>
+<div class="posted-jobs-container">
+  <h1>Your Posted Jobs</h1>
+  <table class="">
+    <thead>
+    <tr>
+      <td>Specialty</td>
+      <td>Location</td>
+      <td>Posted</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% @jobs.each do |job| %>
+      <tr>
+        <td><%= job.specialty %></td>
+        <td><%= "#{job.city}, #{job.state}"%></td>
+        <td><%= job.created_at %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
