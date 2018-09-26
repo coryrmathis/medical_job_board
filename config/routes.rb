@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   get "/cities/:state", to: "misc#cities"
   get "/jobs/:id/description", to: "jobs#description_only"
-  resources :jobs, only: [:show, :index, :new, :create]
+  resources :jobs
   get '/jobs/dev/react_browser', to: 'jobs#react_browser'
   get '/users/:id/posted_jobs', to: 'users#posted_jobs', as: "posted_jobs"
   resources :applications, only: [:create]

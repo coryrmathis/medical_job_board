@@ -1,19 +1,21 @@
 <div class="posted-jobs-container">
   <h1>Your Posted Jobs</h1>
-  <table class="">
+  <table class="table oceanic-table clickable table-responsive" id="posted-jobs-table">
     <thead>
     <tr>
       <td>Specialty</td>
       <td>Location</td>
       <td>Posted</td>
+      <td>Snippet</td>
     </tr>
     </thead>
     <tbody>
     <% @jobs.each do |job| %>
-      <tr>
+      <tr data-link="<%= edit_job_path(job) %>">
         <td><%= job.specialty %></td>
         <td><%= "#{job.city}, #{job.state}"%></td>
-        <td><%= job.created_at %></td>
+        <td><%= format_date(job.created_at) %></td>
+        <td><%= job.job_description_snippet %></td>
       </tr>
     <% end %>
     </tbody>

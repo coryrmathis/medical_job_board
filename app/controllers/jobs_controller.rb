@@ -1,9 +1,10 @@
 class JobsController < ApplicationController
   layout "no_links_in_header", only: [:description_only]
-  before_action :user_is_poster?, only: [:new, :create]
+  before_action :user_is_poster?, only: [:new, :create, :edit, :update, :destroy]
 
   def new
     @job = Job.new
+    render 'new_edit'
   end
 
   def create
@@ -14,6 +15,23 @@ class JobsController < ApplicationController
     else
       redirect_to "/"
     end
+  end
+
+  def edit
+    @job = Job.find(params[:id])
+    render 'new_edit'
+  end
+
+  def update
+    job = Job.find(params[:id])
+    job.update(job_params)
+    redirect_to job_path job
+  end
+
+  def destroy
+    job = Job.find(params[:id])
+    job.delete
+    redirect_to posted_jobs_path current_user
   end
 
   def index

@@ -2,12 +2,12 @@ class UsersController < ApplicationController
   before_action :validate_user
 
   def posted_jobs
-    user = User.find(params[:id])
+    user = current_user
     @jobs = user.posted_jobs
   end
 
   def saved_jobs
-    user = User.find(params[:id])
+    user = current_user
     jobs = user.saved_jobs.page(params[:page])
     if request.xhr?
       jobs_table_data = []
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
   private
   def validate_user
-    unless user_signed_in? && current_user == User.find(params[:id])
+    unless user_signed_in?
       redirect_to '/'
     end
   end

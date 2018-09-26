@@ -2,7 +2,12 @@
   <div class="row justify-content-center">
     <div class="box-form-container col-md-6" id="new-job-form-container">
       <div class="box-title-bar">
-        <h3>Post a New Job</h3>
+        <h3>
+          <%= action_name == "new" ?
+            "Post a New Job" :
+            "Edit Job"
+          %>
+        </h3>
       </div>
       <%= form_for @job, html: {class: "box-form"} do |f| %>
 
@@ -43,6 +48,9 @@
         </div>
 
         <%= f.submit class: "btn-submit btn btn-large btn-success" %>
+        <% if action_name == "edit" %>
+          <%= link_to "Delete Job", job_path(@job), method: :delete, class: "btn btn-danger", data: {confirm: 'Are you sure?'}  %>
+        <% end %>
       <% end %>
     </div>
   </div>

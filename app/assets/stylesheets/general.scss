@@ -259,3 +259,33 @@ thead {
   }
 }
 
+.oceanic-table{
+  display: table;
+  border-bottom: 5px solid $ocean-breeze;
+  flex-shrink: 1;
+  margin-bottom: 0px;
+
+  thead{
+    tr{
+      background-color: $ocean-breeze;
+      color: white;
+    }
+  }
+  td{
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  tbody{
+    tr:nth-child(odd) {
+      background-color: $ocean-mist;
+    }
+  }
+  &.clickable{
+    tbody{
+      cursor: pointer;
+      tr:hover{
+        background-color: $ocean-mist-light;
+      }
+    }
+  }
+}
