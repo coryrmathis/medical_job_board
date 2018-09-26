@@ -137,7 +137,7 @@ class JobBrowser extends React.Component {
           this.state.jobData ?
           <div className="panel-container">
             <div className="job-panel">
-              <JobPanel jobData={this.state.jobData} closeJobWindow={this.closeJobWindow} userID={this.props.userID} handleFavoriteClick={function(){}}/>
+              <JobPanel jobData={this.state.jobData} closeJobWindow={this.closeJobWindow} userID={this.props.userID} accountType={this.props.accountType} handleFavoriteClick={function(){}}/>
             </div>
           </div> :
           <div className="panel-container closed">

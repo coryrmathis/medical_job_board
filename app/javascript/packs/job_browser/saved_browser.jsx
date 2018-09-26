@@ -84,11 +84,10 @@ class SavedBrowser extends React.Component {
               <button className="btn load-more-btn" onClick={this.loadMoreResults}>Load More Jobs</button>
           }
         </div>
-        {
-          this.state.jobData ?
+        {this.state.jobData ?
           <div className="panel-container">
             <div className="job-panel">
-              <JobPanel jobData={this.state.jobData} closeJobWindow={this.closeJobWindow} userID={this.props.userID} handleFavoriteClick={this.handleFavoriteClick}/>
+              <JobPanel jobData={this.state.jobData} closeJobWindow={this.closeJobWindow} userID={this.props.userID} accountType={this.props.accountType} handleFavoriteClick={this.handleFavoriteClick}/>
             </div>
           </div> :
           <div className="panel-container closed">

@@ -74,22 +74,26 @@ class JobPanel extends React.Component {
           <div className="panel-header">
             <div className="panel-button-bar">
               <div className="left">
-                <a className="favorite">
-                  <i
-                    className={this.FavoriteClass()}
-                    onMouseEnter={function(e){
-                      e.target.className = "fa fa-star-half-o";
-                    }}
-                    onMouseLeave={function(e){
-                      e.target.className = this.FavoriteClass();
-                    }.bind(this)}
-                    onClick={this.handleFavoriteClick}
-                  ></i>
-                </a>
+                {this.props.accountType !== "applicant" ?
+                  null :
+                  <a className="favorite">
+                    <i
+                      className={this.FavoriteClass()}
+                      onMouseEnter={function(e){
+                        e.target.className = "fa fa-star-half-o";
+                      }}
+                      onMouseLeave={function(e){
+                        e.target.className = this.FavoriteClass();
+                      }.bind(this)}
+                      onClick={this.handleFavoriteClick}
+                    ></i>
+                  </a>
+                }
                 {this.state.savePopup ? 
                   <div className="save-alert">{this.PopupText()}</div> : 
                   <div className="save-alert hidden">{this.PopupText()}</div>
                 }
+                
               </div>
               <div className="right">
                 <a className='btn btn-info fa fa-external-link' target="_blank" href={`/jobs/${this.props.jobData.raw.id}`} ></a>
