@@ -26,7 +26,7 @@ class JobsController < ApplicationController
           "subspecialty_keywords": job.subspecialty_keywords
         }
       end
-      render json: jobs_table_data.to_json
+      render json: jobs_table_data.to_json, status: :ok, content_type: "application/json"
       return
     else
       if params[:sort]
@@ -46,9 +46,9 @@ class JobsController < ApplicationController
           "raw": @job,
           "markup": @job.job_description_markup,
           "savedJob": @job.interested_users.include?(current_user)
-        }.to_json
+        }.to_json, status: :ok, content_type: "application/json"
       else
-        render json: {"description": "Job not found. We are sorry for the inconvenience."}.to_json
+        render json: {"description": "Job not found. We are sorry for the inconvenience."}.to_json, status: :ok, content_type: "application/json"
       end
     end
   end

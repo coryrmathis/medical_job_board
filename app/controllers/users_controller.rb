@@ -17,7 +17,7 @@ class UsersController < ApplicationController
           "subspecialty_keywords": job.subspecialty_keywords
         }
       end
-      render json: jobs_table_data.to_json
+      render json: jobs_table_data.to_json, status: :ok, content_type: "application/json"
       return
     else
       @jobs = user.saved_jobs
@@ -37,6 +37,7 @@ class UsersController < ApplicationController
           user.saved_jobs << job
         end
       end
+      head :ok, content_type: "text/html"
     end
   end
 
