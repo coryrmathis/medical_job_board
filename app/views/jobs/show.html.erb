@@ -1,14 +1,19 @@
 <%=render "application"%>
-<div id="job-container">
-  <div class="panel">
-    <div class="panel-heading">
-      <h1 class="panel-title"><%="#{@job.specialty} Opening In #{@job.city}, #{@job.state}"%></h1>
-      <div class="panel-title">
+<div class="row justify-content-center">
+  <div id="job-container" class="box-form-page col-md-8">
+    <div class="box-form-container">
+      <div class="box-title-bar">
+        <h3><%="#{@job.specialty} Opening In #{@job.city}, #{@job.state}"%></h3>
+      </div>
+      <div class="job-box-actions">
+        <% if @job.creator == current_user %>
+          <%= link_to "Edit Job", edit_job_path(@job), class: "btn btn-lg btn-warning" %>
+        <% end %>
         <button class="btn btn-punch btn-lg apply-btn" data-toggle="modal" data-target="#applicationModal">Apply</button>
       </div>
-    </div>
-    <div class="panel-body">
-      <%=@job.job_description_markup%>
+      <div class="job-box-contents">
+        <%=@job.job_description_markup%>
+      </div>
     </div>
   </div>
 </div>
