@@ -5,6 +5,7 @@ $job-panel-transition-speed: 0.5s;
 
 .react-browser{
   .job-panel{
+    overflow: hidden;
     width: 450px;
     top:0px;
     bottom:0px;

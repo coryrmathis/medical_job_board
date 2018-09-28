@@ -1,5 +1,4 @@
 import React from 'react';
-import ApplicationModal from './application_modal';
 
 class JobPanel extends React.Component {
   constructor(props) {
@@ -19,7 +18,6 @@ class JobPanel extends React.Component {
       this.setState({savedJob: nextProps.jobData.savedJob});
     }
   }
-
 
   favoriteClass(){
     return this.state.savedJob ? 'fa fa-star' : 'fa fa-star-o';
@@ -112,7 +110,7 @@ class JobPanel extends React.Component {
                 <h3>{this.props.jobData.raw.specialty}</h3>
               </div>
               <p>{this.props.jobData.raw.city}, {this.props.jobData.raw.state}</p>
-              <button className="btn btn-success btn-lg apply-btn" onClick={ this.props.handleModalOpen }> Apply </button>
+              <a className="btn btn-success btn-lg apply-btn" href={"/jobs/"+this.props.jobData.raw.id+"/apply"}> Apply </a>
             </div>
           </div>
           <div className="description-container">

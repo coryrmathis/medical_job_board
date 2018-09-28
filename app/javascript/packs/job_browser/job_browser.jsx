@@ -2,7 +2,6 @@ import React from 'react'
 import JobPanel from './components/job_panel'
 import SearchPanel from './components/search_panel'
 import Table from './components/table'
-import ApplicationModal from './components/application_modal'
 
 class JobBrowser extends React.Component {
   constructor(props) {
@@ -21,7 +20,6 @@ class JobBrowser extends React.Component {
     this.search = this.search.bind(this);
     this.loadMoreResults = this.loadMoreResults.bind(this);
     this.closeJobWindow = this.closeJobWindow.bind(this);
-    this.applicationModalToggle = this.applicationModalToggle.bind(this);
   }
 
   componentDidMount() {
@@ -107,11 +105,6 @@ class JobBrowser extends React.Component {
     this.setState({jobData: null});
   }
 
-  applicationModalToggle(){
-    this.state.applicationModalOpen = !this.state.applicationModalOpen;
-    this.setState(this.state);
-  }
-
   render() {
     return (
       <div className="row">
@@ -141,17 +134,12 @@ class JobBrowser extends React.Component {
         {this.state.jobData ?
           <div className="panel-container">
             <div className="job-panel">
-              <JobPanel jobData={this.state.jobData} closeJobWindow={this.closeJobWindow} userID={this.props.userID} accountType={this.props.accountType} handleFavoriteClick={function(){}}
-              handleModalOpen={this.applicationModalToggle}/>
+              <JobPanel jobData={this.state.jobData} closeJobWindow={this.closeJobWindow} userID={this.props.userID} accountType={this.props.accountType} handleFavoriteClick={function(){}} />
             </div>
           </div> :
           <div className="panel-container closed">
             <div className="job-panel closed"></div>
           </div>
-        }
-        {this.state.applicationModalOpen ?
-          <ApplicationModal handleModalClose={this.applicationModalToggle}/> :
-          null
         }
       </div>
     );

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/jobs/new', to: 'jobs#new'
   resources :jobs, only: [:show, :index]
   get '/jobs/dev/react_browser', to: 'jobs#react_browser'
+  get '/jobs/:id/apply', to: 'jobs#apply'
   put '/users/:id/saved_jobs', to: 'users#update_saved_jobs'
   get '/users/:id/saved_jobs', to: 'users#saved_jobs', as: 'saved_jobs'
 

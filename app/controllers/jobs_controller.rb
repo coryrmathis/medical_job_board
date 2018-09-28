@@ -58,6 +58,10 @@ class JobsController < ApplicationController
     render 'errors/job_unavailable' if !@job
   end
 
+  def apply
+    @job = Job.find_by(id: params[:id])
+  end
+
   private
   def validate_user
     unless user_signed_in?

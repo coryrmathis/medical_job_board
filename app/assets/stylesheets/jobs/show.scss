@@ -19,9 +19,16 @@
 }
 
 #applicationModal{
+  .modal-content{
+    border-radius: 0px;
+    border: 0px;
+  }
   .modal-header{
+    border-radius: 0px;
     justify-content: space-between;
     align-items: center;
+    background-color: $ocean-breeze;
+    color: white;
     .modal-title{
       flex-grow: 1;
       text-align: center;
@@ -31,4 +38,13 @@
       padding: 5px;
     }
   }
+
+}
+.submit-row{
+  padding-top: 15px;
+  border-top: 5px solid $ocean-breeze;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
 }
