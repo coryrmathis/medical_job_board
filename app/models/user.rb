@@ -13,8 +13,7 @@ class User < ApplicationRecord
   
   # == Relationships ========================================================
   has_many :applications
-  #change name later
-  has_many :jobs, through: :applications
+  has_many :applied_jobs, through: :applications, source: :job
   # == Validations ==========================================================
   validates :first_name, :last_name, :email, :account_type, presence: true
   validates :email, uniqueness: true
