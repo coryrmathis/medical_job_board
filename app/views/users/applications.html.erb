@@ -1,0 +1,10 @@
+<div class="box-form-page">
+  <div class="box-form-container">
+    <div class="box-title-bar">
+      <h3>Your Applications</h3>
+    </div>
+    <% @applications.each do |application| %>
+      <%= application.job.specialty %> in <%=application.job.city%>, <%=application.job.state%>. Applied <%= format_date(application.created_at) %>
+    <% end %>
+  </div>
+</div>

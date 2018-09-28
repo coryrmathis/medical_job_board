@@ -20,7 +20,7 @@
         <% if user_signed_in? %>
           <% if current_user.applicant? %>
             <%= link_to "Saved Jobs", saved_jobs_path(current_user), class:"nav-main-links" %>
-            <%= link_to "Applications", '#', class:"nav-main-links" %>
+            <%= link_to "Applications", applications_path(current_user), class:"nav-main-links" %>
           <% end %>
           <% if current_user.poster? %>
             <%= link_to "Posted Jobs", "#", class:"nav-main-links" %>
