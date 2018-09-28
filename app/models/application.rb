@@ -1,5 +1,6 @@
 class Application < ApplicationRecord
   belongs_to :job
+  belongs_to :user
   mount_uploader :cv, CVUploader
 
   # Validations
@@ -15,8 +16,10 @@ class Application < ApplicationRecord
 
   def visa_requirements
     if ["H1", "J1"].include?(self.citizenship) && self.job
-      unless self.job.visas.include?(self.citizenship)
-        errors.add(:base, "This job does not offer sponsorship for your particular visa requirements.  Try searching for jobs that offer visa sponsorship!")
+      if job.visas
+        unless self.job.visas.include?(self.citizenship)
+          errors.add(:base, "This job does not offer sponsorship for your particular visa requirements.  Try searching for jobs that offer visa sponsorship!")
+        end
       end
     end
   end

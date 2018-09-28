@@ -1,6 +1,7 @@
 class Job < ApplicationRecord
   has_many :applications
-
+  #change name later
+  has_many :users, through: :applications
   validates :specialty, presence: true
 
   default_scope { order(:state) }

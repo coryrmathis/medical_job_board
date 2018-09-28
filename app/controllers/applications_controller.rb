@@ -24,6 +24,7 @@ class ApplicationsController < ApplicationController
       :location_preference,
       :citizenship,
       :job_id,
+      :user_id,
       :comments,
       :cv,
       :phone_number

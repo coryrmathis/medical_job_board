@@ -14,8 +14,7 @@ Rails.application.routes.draw do
   resources :jobs, only: [:show, :index]
   get '/jobs/dev/react_browser', to: 'jobs#react_browser'
   get '/users/:id/saved_jobs', to: 'users#saved_jobs', as: 'saved_jobs'
-
-  resources :applications, only: [:create]
+  resources :applications, only: [:create, :index]
 
   # Main Routes
   root "main#index"

@@ -12,7 +12,9 @@ class User < ApplicationRecord
   # == Extensions ===========================================================
   
   # == Relationships ========================================================
-  
+  has_many :applications
+  #change name later
+  has_many :jobs, through: :applications
   # == Validations ==========================================================
   validates :first_name, :last_name, :email, :account_type, presence: true
   validates :email, uniqueness: true
