@@ -4,10 +4,27 @@
       <div class="box-title-bar">
         <h3>Your Applications</h3>
       </div>
-      <% @applications.each do |application| %>
-        <%= application.job.specialty %> in <%=application.job.city%>, <%= application.job.state%>. Applied <%= format_date(application.created_at) %>
-        <br/>
-      <% end %>
+      <div class="table-container">
+        <table class="table table-responsive">
+          <div class="thead">
+            <tr>
+              <td>Specialty</td>
+              <td>Location</td>
+              <td>Application Date</td>
+            </tr>
+          </div>
+          <div class="tbody">
+            <% @applications.each do |application| %>
+              <tr>
+                <td><%= application.job.specialty %></td>
+                <td><%=application.job.city%>, <%= application.job.state%></td>
+                <td><%= format_date(application.created_at) %></td>
+              </tr>
+            <% end %>
+          </div>
+        </table>
+      </div>
+
     </div>
   </div>
 </div>
