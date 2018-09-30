@@ -1,8 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 function TableRow(props) {
-  return(
+  return (
     <tr
       onClick={function(){props.onSelect(props.rowData.id)}.bind(this)}
       data-job-id={props.rowData.id}
