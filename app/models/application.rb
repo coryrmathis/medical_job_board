@@ -1,12 +1,30 @@
 class Application < ApplicationRecord
-  belongs_to :job
-  belongs_to :user
+
   mount_uploader :cv, CVUploader
 
-  # Validations
+  # == Constants ============================================================
+  
+  # == Attributes ===========================================================
+  
+  # == Extensions ===========================================================
+  
+  # == Relationships ========================================================
+  belongs_to :job
+  belongs_to :user
 
+  # == Validations ==========================================================
   validates_inclusion_of :citizenship, in: %w(H1 J1 US GC Other), allow_blank: true, message: "'%{value}' is not a valid option for citizenship."
   validate :visa_requirements
+  # Ensure that a user cannot accidentally apply for same job twice
+  validates_uniqueness_of :user_id, scope: :job_id
+  
+  # == Scopes ===============================================================
+  
+  # == Callbacks ============================================================
+  
+  # == Class Methods ========================================================
+  
+  # == Instance Methods =====================================================
 
   def new_application_notice
     "Thank you for your application! #{job.contact_name} (#{job.contact_email}) with Archway Physician Recruitment, or another recruiter with this firm, will be reaching out to you via email regarding your application."

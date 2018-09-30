@@ -3,9 +3,9 @@ class ApplicationsController < ApplicationController
   def create
 
     application = Application.new(application_params)
-    
+    application.user = current_user
     if application.save
-      NewJobApplicationNoticeEmail.perform_async(application.id)
+      # NewJobApplicationNoticeEmail.perform_async(application.id)
       redirect_back fallback_location: root_path, notice: application.new_application_notice
     else
       errors = application.errors.full_messages.join(" | ")
