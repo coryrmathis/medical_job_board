@@ -5,7 +5,7 @@
         <h3>Your Applications</h3>
       </div>
       <div class="table-container">
-        <table class="table table-responsive">
+        <table class="table oceanic-table clickable table-responsive">
           <div class="thead">
             <tr>
               <td>Specialty</td>
@@ -15,9 +15,9 @@
           </div>
           <div class="tbody">
             <% @applications.each do |application| %>
-              <tr>
+              <tr data-link="<%= job_path(application.job)%>">
                 <td><%= application.job.specialty %></td>
-                <td><%=application.job.city%>, <%= application.job.state%></td>
+                <td><%= application.job.city%>, <%= application.job.state%></td>
                 <td><%= format_date(application.created_at) %></td>
               </tr>
             <% end %>
