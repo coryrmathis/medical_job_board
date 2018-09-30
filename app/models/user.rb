@@ -14,6 +14,7 @@ class User < ApplicationRecord
   # == Relationships ========================================================
   has_many :job_saves
   has_many :saved_jobs, :through => :job_saves, :source => :job
+  has_many :posted_jobs, class_name: "Job"
   # == Validations ==========================================================
   validates :first_name, :last_name, :email, :account_type, presence: true
   validates :email, uniqueness: true

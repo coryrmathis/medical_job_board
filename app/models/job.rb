@@ -1,7 +1,10 @@
+require 'redcarpet/render_strip'
+
 class Job < ApplicationRecord
   has_many :applications
   has_many :job_saves
   has_many :interested_users, :through => :job_saves, :source => :user
+  belongs_to :creator, :class_name => 'User', :foreign_key => 'user_id'
 
   validates :specialty, presence: true
 
@@ -25,5 +28,21 @@ class Job < ApplicationRecord
     renderer = Redcarpet::Render::HTML.new(hard_wrap: true)
     markdown = Redcarpet::Markdown.new(renderer)
     markdown.render(job_description).html_safe
+  end
+
+  def job_description_snippet(length = 150, max_length = 170)
+    # In the case of very short descriptions
+    length = max_length = job_description.length if job_description.length <= length
+
+    # Finds nearest white-space char to cut off the snippet
+    non_snippet = job_description[length...job_description.length]
+    first_space_after_cutoff = non_snippet.index(/\s/)
+
+    # Ensures that a junk description without spaces gets cut off eventually
+    first_space_after_cutoff ||= max_length - length
+
+    snippet = job_description[0...(length + first_space_after_cutoff)]
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::StripDown)
+    markdown.render(snippet + "...")
   end
 end

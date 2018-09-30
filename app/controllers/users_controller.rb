@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
   before_action :validate_user
 
+  def posted_jobs
+    user = current_user
+    @jobs = user.posted_jobs
+  end
+
   def saved_jobs
-    user = User.find(params[:id])
+    user = current_user
     jobs = user.saved_jobs.page(params[:page])
     if request.xhr?
       jobs_table_data = []

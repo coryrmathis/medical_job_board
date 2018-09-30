@@ -10,7 +10,7 @@ $job-panel-transition-speed: 0.5s;
     top:0px;
     bottom:0px;
     right:0px;
-    background: $ocean-mist;
+    background: white;
     margin: 25px;
     margin-top: 90px;
     position:fixed;
@@ -25,6 +25,7 @@ $job-panel-transition-speed: 0.5s;
     }
 
     .panel-contents{
+      background-color: $box-bg-color;
       max-width: 100%;
       flex-grow: 1;
       display: flex;
@@ -82,7 +83,7 @@ $job-panel-transition-speed: 0.5s;
         background-color: white;
         padding: 20px;
         overflow-y:scroll;
-        overflow-x:hidden;
+        word-wrap: break-word;
       }
     }
   }
@@ -106,7 +107,7 @@ $job-panel-transition-speed: 0.5s;
 
     .search-panel{
       margin-bottom: 20px;
-      background-color: $ocean-mist;
+      background-color: $box-bg-color;
 
       .title-bar{
         background-color: $ocean-breeze;
