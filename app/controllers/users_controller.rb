@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
   before_action :validate_user
 
-<<<<<<< HEAD
-  def saved_jobs
-    user = User.find(params[:id])
-=======
   def posted_jobs
     user = current_user
     @jobs = user.posted_jobs
@@ -12,7 +8,6 @@ class UsersController < ApplicationController
 
   def saved_jobs
     user = current_user
->>>>>>> retool
     jobs = user.saved_jobs.page(params[:page])
     if request.xhr?
       jobs_table_data = []

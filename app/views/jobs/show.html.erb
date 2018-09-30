@@ -20,7 +20,6 @@
         <% else %>
           <%= link_to "Please sign in to apply", new_user_session_path, class: "btn btn-lg btn-info" %>
         <% end%>
-        <button class="btn btn-punch btn-lg apply-btn" data-toggle="modal" data-target="#applicationModal">Apply</button>
       </div>
       <div class="job-box-contents">
         <%=@job.job_description_markup%>

@@ -1,30 +1,24 @@
-<div class="box-form-page">
-  <div class="row justify-content-center">
-    <div class="box-form-container col-md-8">
-      <div class="box-title-bar">
-        <h3>Your Applications</h3>
-      </div>
-      <div class="table-container">
-        <table class="table oceanic-table clickable table-responsive">
-          <div class="thead">
-            <tr>
-              <td>Specialty</td>
-              <td>Location</td>
-              <td>Application Date</td>
-            </tr>
-          </div>
-          <div class="tbody">
-            <% @applications.each do |application| %>
-              <tr data-link="<%= job_path(application.job)%>">
-                <td><%= application.job.specialty %></td>
-                <td><%= application.job.city%>, <%= application.job.state%></td>
-                <td><%= format_date(application.created_at) %></td>
-              </tr>
-            <% end %>
-          </div>
-        </table>
-      </div>
-
-    </div>
+<div class="table-page-container">
+  <h1>Your Applications</h1>
+  <div class="table-container">
+    <table class="table oceanic-table clickable table-responsive">
+      <thead>
+        <tr>
+          <td>Specialty</td>
+          <td>Location</td>
+          <td>Application Date</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @applications.each do |application| %>
+          <tr data-link="<%= job_path(application.job)%>">
+            <td><%= application.job.specialty %></td>
+            <td><%= application.job.city%>, <%= application.job.state%></td>
+            <td><%= format_date(application.created_at) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
+
