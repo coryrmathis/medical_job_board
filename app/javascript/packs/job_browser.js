@@ -1,6 +1,6 @@
-import ReactDOM from 'react-dom'
-import React from 'react'
-import JobBrowser from './job_browser/job_browser'
+import ReactDOM from 'react-dom';
+import React from 'react';
+import JobBrowser from './job_browser/job_browser';
 
 document.addEventListener('DOMContentLoaded', () => {
   const node = document.getElementById('jobs-data');
