@@ -15,7 +15,7 @@
       <div id="nav-main" class="nav ocean-breeze">
         <div id="brand"><%=link_to("AllPhysicianCareers", "/")%> <%=fa_icon("heartbeat")%></div>
         <a class="nav-main-links" href="/">Search Jobs</a>
-        <%= link_to "Post a Job", jobs_new_path, class:"nav-main-links"%>
+        <%= link_to "Post a Job", new_job_path, class:"nav-main-links"%>
         <a class="nav-main-links" data-toggle="modal" data-target="#contactInformationModal">Contact</a>
         <% if user_signed_in? %>
           <% if current_user.applicant? %>
@@ -23,7 +23,7 @@
             <%= link_to "Applications", applications_path(current_user), class:"nav-main-links" %>
           <% end %>
           <% if current_user.poster? %>
-            <%= link_to "Posted Jobs", "#", class:"nav-main-links" %>
+            <%= link_to "Posted Jobs", posted_jobs_path(current_user), class:"nav-main-links" %>
           <% end %>
         <% end %>
         <div class="nav-right">

@@ -2,8 +2,9 @@
 <div class="box-form-page">
   <div class="row justify-content-center">
     <div class="box-form-container col-md-6 ">
-      <h3>Forgot your password?</h3>
-
+      <div class="box-title-bar">
+        <h3>Forgot your password?</h3>
+      </div>
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "box-form" }) do |f| %>
         <%= devise_error_messages! %>
 
@@ -12,13 +13,14 @@
           <%= f.email_field :email, autofocus: true %>
         </div>
 
-        <div class="actions">
+        <div class="submit-controls">
           <%= f.submit "Send me reset password instructions", class: "btn" %>
         </div>
       <% end %>
-
-      <%= render "users/shared/links" %>
-      <%= link_to "Back", :back %>
+      <div class="box-footer">
+        <%= render "users/shared/links" %>
+        <%= link_to "Back", :back %>
+      </div>
     </div>
   </div>
 </div>

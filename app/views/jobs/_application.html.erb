@@ -8,7 +8,15 @@
       <div class="modal-body">
         <%=render "application_form"%>
       </div>
-      
+      <div class="modal-footer">
+        <div class="collapse" id="termsOfUse">
+          <div class="well">
+              <%=render "shared/terms_of_use"%>
+          </div>
+        </div>
+        <aside id="application-footer-terms-of-use">By applying to this job you agree to our <a role="button" data-toggle="collapse" href="#termsOfUse" aria-expanded="false" aria-controls="termsOfUse">Terms of Use</a>.</aside>
+        <button type="button" class="btn" data-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>

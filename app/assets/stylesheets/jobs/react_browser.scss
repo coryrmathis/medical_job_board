@@ -1,14 +1,16 @@
 // Including margins
 $job-panel-width: 500px;
+
 $job-panel-transition-speed: 0.5s;
 
 .react-browser{
   .job-panel{
+    overflow: hidden;
     width: 450px;
     top:0px;
     bottom:0px;
     right:0px;
-    background: $ocean-mist;
+    background: white;
     margin: 25px;
     margin-top: 90px;
     position:fixed;
@@ -23,6 +25,8 @@ $job-panel-transition-speed: 0.5s;
     }
 
     .panel-contents{
+      background-color: $box-bg-color;
+      max-width: 100%;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
@@ -79,7 +83,7 @@ $job-panel-transition-speed: 0.5s;
         background-color: white;
         padding: 20px;
         overflow-y:scroll;
-        overflow-x:hidden;
+        word-wrap: break-word;
       }
     }
   }
@@ -103,7 +107,7 @@ $job-panel-transition-speed: 0.5s;
 
     .search-panel{
       margin-bottom: 20px;
-      background-color: $ocean-mist;
+      background-color: $box-bg-color;
 
       .title-bar{
         background-color: $ocean-breeze;
@@ -136,6 +140,10 @@ $job-panel-transition-speed: 0.5s;
         tr{
           background-color: $ocean-breeze;
           color: white;
+          td{
+            border: none;
+          }
+
         }
       }
       td{
@@ -170,5 +178,55 @@ $job-panel-transition-speed: 0.5s;
     color: white;
     background-color: $ocean-breeze;
     padding-bottom: 5px;
+  }
+
+  .save-alert{
+    opacity: 1;
+    display: flex;
+    height: 25px;
+    align-self: center;
+    align-items: center;
+    margin-left: 5px;
+    text-align: center;
+    padding: 3px;
+    position: relative;
+    z-index: 999;
+    background-color: gold;
+    color: rgb(33, 37, 41);
+    font-weight: bold;
+    border-radius: 5px;
+    transition: opacity 500ms;
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 0;
+      height: 0;
+      border: 5px solid transparent;
+      border-right-color: gold;
+      border-left: 0;
+      margin-top: -5px;
+      margin-left: -5px;
+    }
+    &.hidden{
+      opacity: 0;
+    }
+  }
+
+  .saved-jobs-title{
+    color: white;
+    background-color: $ocean-breeze;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 10px;
+    h1{
+      margin: 0;
+    }
+  }
+
+  .application-modal{
+    background-color: rgba(0, 0, 0, 0.372);
+    display: block;
   }
 }

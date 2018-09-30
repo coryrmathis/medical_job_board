@@ -1,24 +1,30 @@
 <%=render "application"%>
-<div id="job-container">
-  <div class="panel">
-    <div class="panel-heading">
-      <h1 class="panel-title"><%="#{@job.specialty} Opening In #{@job.city}, #{@job.state}"%></h1>
-      <div class="panel-title">
-      <% if user_signed_in? %>
-        <% if current_user.applied_jobs.include? @job %>
-          <div class='application-notice'>
-            You applied for this job on <%= format_date(current_user.applications.where(job_id: @job.id).first.created_at) %>.
-          </div>
-        <% else %>
-          <button class="btn btn-punch btn-lg apply-btn" data-toggle="modal" data-target="#applicationModal">Apply</button>
-        <% end%>
-      <% else %>
-        <%= link_to "Please sign in to apply", new_user_session_path, class: "btn btn-lg btn-info" %>
-      <% end %>
+<div class="row justify-content-center">
+  <div id="job-container" class="box-form-page col-md-8">
+    <div class="box-form-container">
+      <div class="box-title-bar">
+        <h3><%="#{@job.specialty} Opening In #{@job.city}, #{@job.state}"%></h3>
       </div>
-    </div>
-    <div class="panel-body">
-      <%=@job.job_description_markup%>
+      <div class="job-box-actions">
+        <% if user_signed_in? %>
+          <% if @job.creator == current_user %>
+            <%= link_to "Edit Job", edit_job_path(@job), class: "btn btn-lg btn-warning" %>
+          <% end %>
+          <% if current_user.applied_jobs.include? @job %>
+            <div class='application-notice'>
+              You applied for this job on <%= format_date(current_user.applications.where(job_id: @job.id).first.created_at) %>.
+            </div>
+          <% else %>
+            <button class="btn btn-punch btn-lg apply-btn" data-toggle="modal" data-target="#applicationModal">Apply</button>
+          <% end%>
+        <% else %>
+          <%= link_to "Please sign in to apply", new_user_session_path, class: "btn btn-lg btn-info" %>
+        <% end%>
+        <button class="btn btn-punch btn-lg apply-btn" data-toggle="modal" data-target="#applicationModal">Apply</button>
+      </div>
+      <div class="job-box-contents">
+        <%=@job.job_description_markup%>
+      </div>
     </div>
   </div>
 </div>

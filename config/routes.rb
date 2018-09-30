@@ -10,12 +10,17 @@ Rails.application.routes.draw do
 
   get "/cities/:state", to: "misc#cities"
   get "/jobs/:id/description", to: "jobs#description_only"
-  get '/jobs/new', to: 'jobs#new'
-  resources :jobs, only: [:show, :index]
+  resources :jobs
   get '/jobs/dev/react_browser', to: 'jobs#react_browser'
+  get '/jobs/:id/apply', to: 'jobs#apply'
+  put '/users/:id/saved_jobs', to: 'users#update_saved_jobs'
   get '/users/:id/saved_jobs', to: 'users#saved_jobs', as: 'saved_jobs'
+  get '/users/:id/posted_jobs', to: 'users#posted_jobs', as: "posted_jobs"
   get '/users/:id/applications', to: 'users#applications', as: 'applications'
   resources :applications, only: [:create, :index]
+
+  # React-to-rails api
+  get "/api/react/method/", to: 'api/react#method_call'
 
   # Main Routes
   root "main#index"

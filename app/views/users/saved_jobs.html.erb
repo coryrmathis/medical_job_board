@@ -1,0 +1,8 @@
+<div class="saved-jobs-container">
+  <%= javascript_pack_tag 'saved_browser' %>
+  <%= content_tag :div,
+    class: "react-browser",
+    id: "jobs-data",
+    data: rails_data do %>
+  <% end %>
+</div>
