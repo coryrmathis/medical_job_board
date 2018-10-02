@@ -1,5 +1,6 @@
 class JobsController < ApplicationController
   layout "no_links_in_header", only: [:description_only]
+  # before_action :validate_user, only: [:react_browser]
   before_action :user_is_poster?, only: [:new, :create, :edit, :update, :destroy]
 
   def new
@@ -39,10 +40,11 @@ class JobsController < ApplicationController
       # original xhr behavior, to ask cory: are there external services that need this behavior?
       # render "index", layout: false
       if params[:job]
-        jobs = Job.search(params[:job]).page(params[:page])
+        jobs = Job.search(params[:job]).order("state desc, city, id").page(params[:page])
       else
-        jobs = Job.all.page(params[:page])
+        jobs = Job.all.order("state desc, city, id").page(params[:page])
       end
+
       jobs_table_data = []
       jobs.each do |job|
         jobs_table_data << {
@@ -104,6 +106,13 @@ class JobsController < ApplicationController
       :contact_email,
       :contact_name,
     )
+  end
+
+  def validate_user
+    unless user_signed_in?
+      flash[:notice] = "Please sign in"
+      redirect_to new_user_session_path and return
+    end
   end
 
   def user_is_poster?

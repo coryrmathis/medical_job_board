@@ -1,22 +1,26 @@
-import React from 'react'
-import JobPanel from './components/job_panel'
-import SearchPanel from './components/search_panel'
-import Table from './components/table'
+import React from 'react';
+import update from 'immutability-helper';
+import PropTypes from 'prop-types';
+import JobPanel from './components/job_panel';
+import SearchPanel from './components/search_panel';
+import Table from './components/table';
 
 class JobBrowser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       allJobsData: null,
-      searchParams: {},
+      searchParams: {
+        specialty: null,
+        state: null,
+        city: null,
+        subspecialty_keywords: null,
+        visas: null,
+      },
       resultsPage: 1,
     };
     this.onRowSelect = this.onRowSelect.bind(this);
-    this.onSpecialtyChange = this.onSpecialtyChange.bind(this);
-    this.onStateChange = this.onStateChange.bind(this);
-    this.onCityChange = this.onCityChange.bind(this);
-    this.onKeywordsChange = this.onKeywordsChange.bind(this);
-    this.onVisasChange = this.onVisasChange.bind(this);
+    this.onSearchParamChange = this.onSearchParamChange.bind(this);
     this.search = this.search.bind(this);
     this.loadMoreResults = this.loadMoreResults.bind(this);
     this.closeJobWindow = this.closeJobWindow.bind(this);
@@ -25,125 +29,153 @@ class JobBrowser extends React.Component {
   componentDidMount() {
     $.get({
       cache: false,
-      url: "/jobs/",
-    }).then(function(data){
-      this.setState({numRecentlyLoadedResults: data.length});
-      this.state.allJobsData = data;
-      this.setState(this.state);
-    }.bind(this));
+      url: this.props.savedJobsOnly
+        ? `/users/${this.props.userID}/saved_jobs`
+        : '/jobs/',
+    }).then((data) => {
+      this.setState({
+        numRecentlyLoadedResults: data.length,
+        allJobsData: data,
+      });
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // Ajax request on 'load more'
+    if (prevState.resultsPage !== this.state.resultsPage) {
+      $.get({
+        cache: false,
+        url: this.props.savedJobsOnly
+          ? `/users/${this.props.userID}/saved_jobs`
+          : '/jobs/',
+        data: { page: this.state.resultsPage, job: this.state.searchParams },
+      }).then((data) => {
+        this.setState(
+          newPrevState => (
+            {
+              numRecentlyLoadedResults: data.length,
+              allJobsData: update(newPrevState.allJobsData, { $push: data }),
+            }
+          ),
+        );
+      });
+    }
   }
 
   onRowSelect(id) {
     $.get({
       cache: false,
-      url: "/jobs/" + id,
-    }).then(function(data){
-      this.state.jobData = data;
-      this.setState(this.state);
-    }.bind(this));
+      url: `/jobs/${id}`,
+    }).then((data) => {
+      this.setState({
+        jobData: data,
+      });
+    });
   }
 
-  onSpecialtyChange(newSpecialty) {
-    this.state.searchParams["specialty"] = newSpecialty;
-    this.setState(this.state);
-    this.search();
-  }
-
-  onStateChange(newState) {
-    this.state.searchParams["state"] = newState;
-    this.setState(this.state);
-    this.search();
-  }
-
-  onCityChange(newCity) {
-    this.state.searchParams["city"] = newCity;
-    this.setState(this.state);
-    this.search();
-  }
-
-  onKeywordsChange(newKeywords) {
-    this.state.searchParams["subspecialty_keywords"] = newKeywords;
-    this.setState(this.state);
-    this.search();
-  }
-
-  onVisasChange(newVisa) {
-    this.state.searchParams["visas"] = newVisa;
-    this.setState(this.state);
-    this.search();
+  onSearchParamChange(paramName, newParamValue) {
+    this.setState(
+      prevState => ({
+        searchParams: update(prevState.searchParams, {
+          [paramName]: {
+            $set: newParamValue,
+          },
+        }),
+      }),
+      () => { this.search(); },
+    );
   }
 
   search() {
-    this.setState({resultsPage: 1});
+    this.setState({ resultsPage: 1 });
     $.get({
       cache: false,
-      url: "/jobs/",
-      data: {"job": this.state.searchParams}
-    }).then(function(data){
-      this.setState({numRecentlyLoadedResults: data.length});
-      this.setState({allJobsData: data});
-    }.bind(this));
+      url: '/jobs/',
+      data: { job: this.state.searchParams },
+    }).then((data) => {
+      this.setState({ numRecentlyLoadedResults: data.length });
+      this.setState({ allJobsData: data });
+    });
   }
 
   loadMoreResults() {
-    console.log(this.state.resultsPage);
-    this.state.resultsPage += 1;
-    this.setState(this.state);
-
-    $.get({
-      cache: false,
-      url: "/jobs/",
-      data: {"page": this.state.resultsPage, "job": this.state.searchParams}
-    }).then(function(data){
-      this.setState({numRecentlyLoadedResults: data.length});
-      this.state.allJobsData = this.state.allJobsData.concat(data);
-      this.setState(this.state);
-    }.bind(this));
+    this.setState(
+      prevState => ({ resultsPage: prevState.resultsPage + 1 }),
+    );
   }
 
   closeJobWindow() {
-    this.setState({jobData: null});
+    this.setState({ jobData: null });
   }
 
   render() {
     return (
       <div className="row">
         <div className="table-container">
-          {this.props.savedJobsOnly ?
-            <div></div> :
-            <SearchPanel
+          { this.props.savedJobsOnly
+            ? null
+            : (
+              <SearchPanel
                 specialties={this.props.specialties}
                 states={this.props.states}
-                onSpecialtyChange={this.onSpecialtyChange}
-                onStateChange={this.onStateChange}
-                onCityChange={this.onCityChange}
-                onKeywordsChange={this.onKeywordsChange}
-                onVisasChange={this.onVisasChange}
-            />
+                onSearchParamChange={this.onSearchParamChange}
+              />
+            )
           }
-          
-          {this.state.numRecentlyLoadedResults === 0 ? 
-            <div></div> :
-            <Table allJobsData={this.state.allJobsData} onRowSelect={this.onRowSelect}/>
+          { this.state.numRecentlyLoadedResults === 0
+            ? null
+            : <Table allJobsData={this.state.allJobsData} onRowSelect={this.onRowSelect} />
           }
-          {this.state.numRecentlyLoadedResults < this.props.resultsPerPage ?
-            <div className="end-of-results"><h5>End of Results</h5></div> : 
-            <button className="btn load-more-btn" onClick={this.loadMoreResults}>Load More Jobs</button>
+          { this.state.numRecentlyLoadedResults < this.props.resultsPerPage
+            ? <div className="end-of-results"><h5>End of Results</h5></div>
+            : (
+              <button
+                type="button"
+                className="btn load-more-btn"
+                onClick={this.loadMoreResults}
+              >
+                Load More Jobs
+              </button>
+            )
           }
         </div>
-        {this.state.jobData ?
-          <div className="panel-container">
-            <div className="job-panel">
-              <JobPanel jobData={this.state.jobData} closeJobWindow={this.closeJobWindow} userID={this.props.userID} accountType={this.props.accountType} handleFavoriteClick={function(){}} />
+        { this.state.jobData
+          ? (
+            <div className="panel-container">
+              <div className="job-panel">
+                <JobPanel
+                  jobData={this.state.jobData}
+                  closeJobWindow={this.closeJobWindow}
+                  userID={this.props.userID}
+                  accountType={this.props.accountType}
+                />
+              </div>
             </div>
-          </div> :
-          <div className="panel-container closed">
-            <div className="job-panel closed"></div>
-          </div>
+          )
+          : (
+            <div className="panel-container closed">
+              <div className="job-panel closed" />
+            </div>
+          )
         }
       </div>
     );
   }
 }
+
+JobBrowser.propTypes = {
+  specialties: PropTypes.arrayOf(PropTypes.string).isRequired,
+  states: PropTypes.objectOf(PropTypes.string).isRequired,
+  resultsPerPage: PropTypes.number.isRequired,
+  userID: PropTypes.number,
+  accountType: PropTypes.string,
+  savedJobsOnly: PropTypes.bool,
+};
+
+JobBrowser.defaultProps = {
+  userID: null,
+  accountType: null,
+  savedJobsOnly: false,
+};
 
 export default JobBrowser;

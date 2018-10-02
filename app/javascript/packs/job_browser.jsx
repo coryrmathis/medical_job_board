@@ -8,8 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const states = JSON.parse(node.getAttribute('data-states'));
   const userID = JSON.parse(node.getAttribute('data-user-id'));
   const accountType = JSON.parse(node.getAttribute('data-user-account-type'));
+  const savedJobsOnly = JSON.parse(node.getAttribute('data-saved-jobs'));
   ReactDOM.render(
-    <JobBrowser specialties={specialties} states={states} resultsPerPage={25}userID={userID} accountType={accountType} savedJobsOnly={false}/>,
+    <JobBrowser
+      specialties={specialties}
+      states={states}
+      resultsPerPage={25}
+      userID={userID}
+      accountType={accountType}
+      savedJobsOnly={savedJobsOnly}
+    />,
     node.appendChild(document.createElement('div')),
   );
 });

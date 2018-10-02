@@ -1,6 +1,5 @@
 // Including margins
 $job-panel-width: 500px;
-
 $job-panel-transition-speed: 0.5s;
 
 .react-browser{
@@ -47,11 +46,16 @@ $job-panel-transition-speed: 0.5s;
               font-size: 25px;
               color: gold;
               text-decoration: none;
+              cursor: pointer;
             }
           }
           .right{
             display: flex;
             justify-content: flex-end;
+            a{
+              display: flex;
+              align-items: center;
+            }
           }
           
           .btn{

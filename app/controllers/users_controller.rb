@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def saved_jobs
     user = current_user
-    jobs = user.saved_jobs.page(params[:page])
+    jobs = user.saved_jobs.order("state desc, city, id").page(params[:page])
     if request.xhr?
       jobs_table_data = []
       jobs.each do |job|

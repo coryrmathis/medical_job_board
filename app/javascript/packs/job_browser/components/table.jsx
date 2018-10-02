@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import uniqid from 'uniqid';
 
 function TableRow(props) {
-  return(
+  return (
     <tr
-      onClick={function(){props.onSelect(props.rowData.id)}.bind(this)}
+      onClick={() => { props.onSelect(props.rowData.id); }}
       data-job-id={props.rowData.id}
     >
       <td>{props.row + 1}</td>
@@ -17,11 +19,24 @@ function TableRow(props) {
   );
 }
 
+TableRow.propTypes = {
+  onSelect: PropTypes.func.isRequired,
+  row: PropTypes.number.isRequired,
+  rowData: PropTypes.shape({
+    id: PropTypes.number,
+    specialty: PropTypes.string,
+    city: PropTypes.string,
+    state: PropTypes.string,
+    visas: PropTypes.string,
+    distance_to_metro: PropTypes.string,
+    subspecialty_keywords: PropTypes.string,
+  }).isRequired,
+};
+
 function Table(props) {
   if (!props.allJobsData) {
     return (
-      <div>
-      </div>
+      null
     );
   }
   return (
@@ -38,14 +53,36 @@ function Table(props) {
         </tr>
       </thead>
       <tbody>
-        {props.allJobsData.map(function (job, i) {
-          return (
-            <TableRow rowData={job} row={i} key={i} onSelect={props.onRowSelect}/>
-          );
-        })}
+        { props.allJobsData.map((job, i) => (
+          <TableRow
+            rowData={job}
+            row={i}
+            key={uniqid()}
+            onSelect={props.onRowSelect}
+          />
+        )) }
       </tbody>
     </table>
   );
 }
+
+Table.propTypes = {
+  onRowSelect: PropTypes.func.isRequired,
+  allJobsData: PropTypes.arrayOf(
+    PropTypes.shape({
+      city: PropTypes.string,
+      distance_to_metro: PropTypes.string,
+      id: PropTypes.number,
+      specialty: PropTypes.string,
+      state: PropTypes.string,
+      subspecialty_keywords: PropTypes.string,
+      visas: PropTypes.string,
+    }),
+  ),
+};
+
+Table.defaultProps = {
+  allJobsData: null,
+};
 
 export default Table;

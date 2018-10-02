@@ -1,10 +1,15 @@
 <div class='box-form-page'>
-  <div class="box-form-container">
-    <div class='box-form'>
+  <div class="row justify-content-center">
+    <div class="box-form-container col-md-8">
       <div class='box-title-bar'>
-        <h3><%= "Apply for #{@job.specialty} Opening in #{@job.city}, #{@job.state}"  %></h3>
+        <h3><%= "Apply for #{@job.specialty} Opening in #{@job.city}, #{@job.state}" %></h3>
       </div>
-      <%=render "application_form"%>
+      <div class='box-form'>
+        <%=render "application_form"%>
+      </div>
+      <div class="terms-of-use-container">
+        <%= render '/shared/terms_of_use' %>
+      </div>
     </div>
   </div>
 </div>
