@@ -5,16 +5,16 @@ import uniqid from 'uniqid';
 function TableRow(props) {
   return (
     <tr
-      onClick={() => { props.onSelect(props.rowData.id); }}
-      data-job-id={props.rowData.id}
+      onClick={() => { props.onSelect(props.job); }}
+      data-job-id={props.job.id}
     >
       <td>{props.row + 1}</td>
-      <td>{props.rowData.specialty}</td>
-      <td>{props.rowData.city}</td>
-      <td>{props.rowData.state}</td>
-      <td>{props.rowData.visas}</td>
-      <td>{props.rowData.distance_to_metro}</td>
-      <td>{props.rowData.subspecialty_keywords}</td>
+      <td>{props.job.specialty}</td>
+      <td>{props.job.city}</td>
+      <td>{props.job.state}</td>
+      <td>{props.job.visas}</td>
+      <td>{props.job.distance_to_metro}</td>
+      <td>{props.job.subspecialty_keywords}</td>
     </tr>
   );
 }
@@ -22,7 +22,7 @@ function TableRow(props) {
 TableRow.propTypes = {
   onSelect: PropTypes.func.isRequired,
   row: PropTypes.number.isRequired,
-  rowData: PropTypes.shape({
+  job: PropTypes.shape({
     id: PropTypes.number,
     specialty: PropTypes.string,
     city: PropTypes.string,
@@ -55,7 +55,7 @@ function Table(props) {
       <tbody>
         { props.allJobsData.map((job, i) => (
           <TableRow
-            rowData={job}
+            job={job}
             row={i}
             key={uniqid()}
             onSelect={props.onRowSelect}

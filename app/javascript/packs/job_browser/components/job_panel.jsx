@@ -36,7 +36,7 @@ class JobPanel extends React.Component {
     this.setState(prevState => ({ savedJob: !prevState.savedJob }));
 
     $.ajax({
-      url: `/users/${this.props.userID}/saved_jobs`,
+      url: `/api/v1/applicants/${this.props.userID}/saved_jobs`,
       type: 'PUT',
       beforeSend: (xhr) => {
         xhr.setRequestHeader('X-CSRF-Token', token);
@@ -46,8 +46,10 @@ class JobPanel extends React.Component {
       // Success
       () => {
         console.log('successfully saved savedJob status');
+
         // Bubble this up to main browser for any higher level action?
         // this.props.handleFavoriteClick();
+
         // Animate lil popup notification
         this.setState({ savePopup: true });
         window.setTimeout(() => {

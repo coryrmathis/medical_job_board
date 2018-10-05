@@ -19,8 +19,22 @@ Rails.application.routes.draw do
   get '/users/:id/applications', to: 'users#applications', as: 'applications'
   resources :applications, only: [:create, :index]
 
-  # React-to-rails api
-  get "/api/react/method/", to: 'api/react#method_call'
+  # API
+  namespace :api do
+    namespace :v1 do
+      resources :applicants, only: [:index, :show]
+      get '/applicants/:id/applied_jobs', to: 'applicants#applied_jobs'
+      get '/applicants/:id/saved_jobs', to: 'applicants#saved_jobs'
+      get '/applicants/:id/saved_jobs/ids', to: 'applicants#saved_jobs_ids'
+      put '/applicants/:id/saved_jobs', to: 'applicants#update_saved_jobs'
+      
+      resources :jobs, only: [:index, :show]
+      get '/jobs/:id/markup', to: 'jobs#markup'
+      get '/jobs/:id/interested_users/ids', to: 'jobs#interested_users_ids'
+      get '/jobs/:id/applicants/ids', to: 'jobs#applicants_ids'
+
+    end
+  end
 
   # Main Routes
   root "main#index"

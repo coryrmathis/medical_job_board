@@ -6,6 +6,13 @@ import SearchPanel from './components/search_panel';
 import Table from './components/table';
 
 class JobBrowser extends React.Component {
+  static getJobMarkup(jobID) {
+    return $.get({
+      cache: false,
+      url: `/api/v1/jobs/${jobID}/markup`,
+    });
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +27,7 @@ class JobBrowser extends React.Component {
       resultsPage: 1,
     };
     this.onRowSelect = this.onRowSelect.bind(this);
+    this.getSavedStatus = this.getSavedStatus.bind(this);
     this.onSearchParamChange = this.onSearchParamChange.bind(this);
     this.search = this.search.bind(this);
     this.loadMoreResults = this.loadMoreResults.bind(this);
@@ -30,8 +38,8 @@ class JobBrowser extends React.Component {
     $.get({
       cache: false,
       url: this.props.savedJobsOnly
-        ? `/users/${this.props.userID}/saved_jobs`
-        : '/jobs/',
+        ? `/api/v1/applicants/${this.props.userID}/saved_jobs`
+        : '/api/v1/jobs/',
     }).then((data) => {
       this.setState({
         numRecentlyLoadedResults: data.length,
@@ -46,8 +54,8 @@ class JobBrowser extends React.Component {
       $.get({
         cache: false,
         url: this.props.savedJobsOnly
-          ? `/users/${this.props.userID}/saved_jobs`
-          : '/jobs/',
+          ? `/api/v1/applicants/${this.props.userID}/saved_jobs`
+          : '/api/v1/jobs/',
         data: { page: this.state.resultsPage, job: this.state.searchParams },
       }).then((data) => {
         this.setState(
@@ -62,15 +70,17 @@ class JobBrowser extends React.Component {
     }
   }
 
-  onRowSelect(id) {
-    $.get({
-      cache: false,
-      url: `/jobs/${id}`,
-    }).then((data) => {
-      this.setState({
-        jobData: data,
-      });
-    });
+  onRowSelect(job) {
+    $.when(this.getSavedStatus(job.id), JobBrowser.getJobMarkup(job.id)).done(
+      (r1, r2) => {
+        const newJobData = {
+          raw: job,
+          savedJob: r1,
+          markup: r2[0],
+        };
+        this.setState({ jobData: newJobData });
+      },
+    );
   }
 
   onSearchParamChange(paramName, newParamValue) {
@@ -86,11 +96,23 @@ class JobBrowser extends React.Component {
     );
   }
 
+  getSavedStatus(jobID) {
+    return $.get({
+      cache: false,
+      url: `/api/v1/applicants/${this.props.userID}/saved_jobs/ids`,
+    }).then((data) => {
+      if (data.includes(jobID)) {
+        return true;
+      }
+      return false;
+    });
+  }
+
   search() {
     this.setState({ resultsPage: 1 });
     $.get({
       cache: false,
-      url: '/jobs/',
+      url: '/api/v1/jobs/',
       data: { job: this.state.searchParams },
     }).then((data) => {
       this.setState({ numRecentlyLoadedResults: data.length });
