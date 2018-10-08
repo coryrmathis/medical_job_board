@@ -11,6 +11,10 @@ class Api::V1::ApplicantsController < Api::V1::BaseController
     render json: valid_applicant.applied_jobs.order("state desc, city, id").page(params[:page]).to_json
   end
 
+  def applied_jobs_ids
+    render json: valid_applicant.applied_jobs.pluck(:id).uniq.to_json
+  end
+
   def saved_jobs
     render json: valid_applicant.saved_jobs.order("state desc, city, id").page(params[:page]).to_json
   end

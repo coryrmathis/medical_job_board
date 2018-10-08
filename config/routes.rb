@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :applicants, only: [:index, :show]
       get '/applicants/:id/applied_jobs', to: 'applicants#applied_jobs'
+      get '/applicants/:id/applied_jobs/ids', to: 'applicants#applied_jobs_ids'
       get '/applicants/:id/saved_jobs', to: 'applicants#saved_jobs'
       get '/applicants/:id/saved_jobs/ids', to: 'applicants#saved_jobs_ids'
       put '/applicants/:id/saved_jobs', to: 'applicants#update_saved_jobs'

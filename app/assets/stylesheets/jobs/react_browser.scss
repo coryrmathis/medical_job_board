@@ -234,3 +234,10 @@ $job-panel-transition-speed: 0.5s;
     display: block;
   }
 }
+
+.react-loading-spinner{
+  display: flex;
+  font-size: 50px;
+  align-items: center;
+  justify-content: center;
+}

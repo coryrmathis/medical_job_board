@@ -1,7 +1,7 @@
 class JobsController < ApplicationController
   layout "no_links_in_header", only: [:description_only]
-  # before_action :validate_user, only: [:react_browser]
-  before_action :user_is_poster?, only: [:new, :create, :edit, :update, :destroy]
+  before_action :validate_user, only: [:react_browser]
+  before_action :validate_poster, only: [:new, :create, :edit, :update, :destroy]
 
   def new
     @job = Job.new
@@ -36,52 +36,20 @@ class JobsController < ApplicationController
   end
 
   def index
-    if request.xhr?
-      # original xhr behavior, to ask cory: are there external services that need this behavior?
-      # render "index", layout: false
-      if params[:job]
-        jobs = Job.search(params[:job]).order("state desc, city, id").page(params[:page])
-      else
-        jobs = Job.all.order("state desc, city, id").page(params[:page])
-      end
-
-      jobs_table_data = []
-      jobs.each do |job|
-        jobs_table_data << {
-          "id": job.id,
-          "specialty": job.specialty,
-          "city": job.city,
-          "state": job.state,
-          "visas": job.visas,
-          "distance_to_metro": job.distance_to_metro,
-          "subspecialty_keywords": job.subspecialty_keywords
-        }
-      end
-      render json: jobs_table_data.to_json, status: :ok, content_type: "application/json"
-      return
+    if params[:sort]
+      @jobs = Job.search(params[:job]).reorder(params[:sort]).page(params[:page])
     else
-      if params[:sort]
-        @jobs = Job.search(params[:job]).reorder(params[:sort]).page(params[:page])
-      else
-        @jobs = Job.search(params[:job]).page(params[:page])
-      end
+      @jobs = Job.search(params[:job]).page(params[:page])
+    end
+
+    if request.xhr?
+      render "index", layout: false
     end
   end
 
   def show
     @job = Job.find_by(id: params[:id]) || Job.find_by(aid: params[:id])
     render 'errors/job_unavailable' if !@job
-    if request.xhr?
-      if @job
-        render json: {
-          "raw": @job,
-          "markup": @job.job_description_markup,
-          "savedJob": @job.interested_users.include?(current_user)
-        }.to_json, status: :ok, content_type: "application/json"
-      else
-        render json: {"description": "Job not found. We are sorry for the inconvenience."}.to_json, status: :ok, content_type: "application/json"
-      end
-    end
   end
 
   def description_only
@@ -115,7 +83,7 @@ class JobsController < ApplicationController
     end
   end
 
-  def user_is_poster?
+  def validate_poster
     unless user_signed_in?
       flash[:notice] = "Please sign in to post a job."
       redirect_to new_user_session_path and return

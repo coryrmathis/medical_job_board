@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import JobPanel from './components/job_panel';
 import SearchPanel from './components/search_panel';
 import Table from './components/table';
+// import LoadingSpinner from './components/loading_spinner';
 
 class JobBrowser extends React.Component {
   static getJobMarkup(jobID) {
@@ -25,6 +26,7 @@ class JobBrowser extends React.Component {
         visas: null,
       },
       resultsPage: 1,
+      loading: false,
     };
     this.onRowSelect = this.onRowSelect.bind(this);
     this.getSavedStatus = this.getSavedStatus.bind(this);
@@ -35,15 +37,18 @@ class JobBrowser extends React.Component {
   }
 
   componentDidMount() {
-    $.get({
-      cache: false,
-      url: this.props.savedJobsOnly
-        ? `/api/v1/applicants/${this.props.userID}/saved_jobs`
-        : '/api/v1/jobs/',
-    }).then((data) => {
-      this.setState({
-        numRecentlyLoadedResults: data.length,
-        allJobsData: data,
+    this.setState({loading: true}, () => {
+      $.get({
+        cache: false,
+        url: this.props.savedJobsOnly
+          ? `/api/v1/applicants/${this.props.userID}/saved_jobs`
+          : '/api/v1/jobs/',
+      }).then((data) => {
+        this.setState({
+          numRecentlyLoadedResults: data.length,
+          allJobsData: data,
+          loading: false,
+        });
       });
     });
   }
@@ -71,12 +76,17 @@ class JobBrowser extends React.Component {
   }
 
   onRowSelect(job) {
-    $.when(this.getSavedStatus(job.id), JobBrowser.getJobMarkup(job.id)).done(
-      (r1, r2) => {
+    $.when(
+      this.getSavedStatus(job.id),
+      JobBrowser.getJobMarkup(job.id),
+      this.getApplicationStatus(job.id),
+    ).done(
+      (r1, r2, r3) => {
         const newJobData = {
           raw: job,
           savedJob: r1,
           markup: r2[0],
+          appliedJob: r3,
         };
         this.setState({ jobData: newJobData });
       },
@@ -100,6 +110,18 @@ class JobBrowser extends React.Component {
     return $.get({
       cache: false,
       url: `/api/v1/applicants/${this.props.userID}/saved_jobs/ids`,
+    }).then((data) => {
+      if (data.includes(jobID)) {
+        return true;
+      }
+      return false;
+    });
+  }
+
+  getApplicationStatus(jobID) {
+    return $.get({
+      cache: false,
+      url: `/api/v1/applicants/${this.props.userID}/applied_jobs/ids`,
     }).then((data) => {
       if (data.includes(jobID)) {
         return true;
@@ -135,7 +157,7 @@ class JobBrowser extends React.Component {
       <div className="row">
         <div className="table-container">
           { this.props.savedJobsOnly
-            ? null
+            ? <h1>Your Saved Jobs</h1>
             : (
               <SearchPanel
                 specialties={this.props.specialties}

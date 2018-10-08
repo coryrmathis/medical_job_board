@@ -116,7 +116,10 @@ class JobPanel extends React.Component {
               <p>
                 {`${this.props.jobData.raw.city}, ${this.props.jobData.raw.state}`}
               </p>
-              <a className="btn btn-success btn-lg apply-btn" href={`/jobs/${this.props.jobData.raw.id}/apply`}> Apply </a>
+              { this.props.jobData.appliedJob
+                ? "You've already applied for this job."
+                : <a className="btn btn-success btn-lg apply-btn" href={`/jobs/${this.props.jobData.raw.id}/apply`}> Apply </a>
+              }
             </div>
           </div>
           <div className="description-container">
@@ -142,6 +145,7 @@ class JobPanel extends React.Component {
 JobPanel.propTypes = {
   jobData: PropTypes.shape({
     savedJob: PropTypes.bool,
+    appliedJob: PropTypes.bool,
     markup: PropTypes.string,
     raw: PropTypes.shape({
       aid: PropTypes.number,
@@ -158,6 +162,7 @@ JobPanel.propTypes = {
       updated_at: PropTypes.string,
       user_id: PropTypes.number,
       visas: PropTypes.string,
+
     }),
   }).isRequired,
   closeJobWindow: PropTypes.func.isRequired,
