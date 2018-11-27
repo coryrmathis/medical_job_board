@@ -11,7 +11,7 @@
   }
 }
 
-.panel-container {
+.panel {
   padding: 2% 10%;
 
   h1{
@@ -20,6 +20,7 @@
   }
 
   .panel-body{
+    display: flex;
     padding: 5%;
   }
 }
@@ -28,4 +29,12 @@
   display: block;
   margin: 0 auto;
   margin-top: 20px;
+}
+.job-map-container{
+  padding-left: 20px;
+  border-left: 1px solid lightgray;
+}
+#job-map{
+  height: 300px;
+  min-width: 300px;
 }
