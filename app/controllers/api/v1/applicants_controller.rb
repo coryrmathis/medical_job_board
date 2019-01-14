@@ -40,11 +40,15 @@ class Api::V1::ApplicantsController < Api::V1::BaseController
 
   private
   def validate_applicant
-    user = User.find(params[:id])
-    unless user && user.applicant?
-      not_found
-    end
-    self.valid_applicant = user
+    
+    # user = User.find(params[:id])
+    # unless user && user.applicant?
+    #   not_found
+    # end
+    # self.valid_applicant = user
+
+    # Use other if we want user validated as applicant
+    self.valid_applicant = User.find_by(id: params[:id])
   end
 
 end
