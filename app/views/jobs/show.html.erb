@@ -8,7 +8,13 @@
       </div>
     </div>
     <div class="panel-body">
-      <%=@job.job_description_markup%>
+      <div class="job-description">
+        <%=@job.job_description_markup%>
+      </div>
+      <div class="job-map-container">
+        <div id="job-map" data-address="<%="#{@job.city.gsub(' ','+')},#{@job.state}"%>">
+        </div>
+      </div>
     </div>
   </div>
 </div>
