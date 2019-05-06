@@ -1,0 +1,16 @@
+{
+  "application.js": "/packs/application-563b227bd6fc93262bcd.js",
+  "application.js.map": "/packs/application-563b227bd6fc93262bcd.js.map",
+  "job_browser.js": "/packs/job_browser-275775902636556b626b.js",
+  "job_browser.js.map": "/packs/job_browser-275775902636556b626b.js.map",
+  "job_browser/components/job_panel.js": "/packs/job_browser/components/job_panel-46bd4682b549b0fdb4b0.js",
+  "job_browser/components/job_panel.js.map": "/packs/job_browser/components/job_panel-46bd4682b549b0fdb4b0.js.map",
+  "job_browser/components/loading_spinner.js": "/packs/job_browser/components/loading_spinner-afb397fd466414c70973.js",
+  "job_browser/components/loading_spinner.js.map": "/packs/job_browser/components/loading_spinner-afb397fd466414c70973.js.map",
+  "job_browser/components/search_panel.js": "/packs/job_browser/components/search_panel-2b40e5929c608038a3df.js",
+  "job_browser/components/search_panel.js.map": "/packs/job_browser/components/search_panel-2b40e5929c608038a3df.js.map",
+  "job_browser/components/table.js": "/packs/job_browser/components/table-3c59de518fc24eb5adf4.js",
+  "job_browser/components/table.js.map": "/packs/job_browser/components/table-3c59de518fc24eb5adf4.js.map",
+  "job_browser/job_browser.js": "/packs/job_browser/job_browser-19b6ad7d4065a5f27761.js",
+  "job_browser/job_browser.js.map": "/packs/job_browser/job_browser-19b6ad7d4065a5f27761.js.map"
+}
