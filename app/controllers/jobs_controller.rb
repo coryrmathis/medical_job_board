@@ -26,5 +26,14 @@ class JobsController < ApplicationController
     @job = Job.find_by(id: params[:id]) || Job.find_by(aid: params[:id])
     render 'errors/job_unavailable' if !@job
   end
+
+  def aid_description_only
+    @job = Job.find_by(aid: params[:aid])
+    if @job.present?
+      render 'description_only'
+    else
+      render 'errors/job_unavailable'
+    end
+  end
   
 end
