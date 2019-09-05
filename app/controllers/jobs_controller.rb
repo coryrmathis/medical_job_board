@@ -35,5 +35,29 @@ class JobsController < ApplicationController
       render 'errors/job_unavailable'
     end
   end
+
+  def sid_description_only
+    @job = Job.find_by(sid: params[:sid])
+    if @job.present?
+      render 'description_only'
+    else
+      render 'errors/job_unavailable'
+    end
+  end
+
+  def from_external_description_only
+    case params[:source]
+    when 'archway'
+      @job = Job.find_by(aid: params[:external_id])
+    when 'summit'
+      @job = Job.find_by(sid: params[:external_id])
+    end
+    
+    if @job.present?
+      render 'description_only'
+    else
+      render 'errors/job_unavailable'
+    end
+  end
   
 end

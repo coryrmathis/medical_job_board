@@ -5,11 +5,17 @@ class SynchronizePositionsJob
 
   def initialize
     @s3 = configure_s3
-    @object = "job_board/active_positions.csv"
     @import_ids = []
   end
 
-  def perform
+  def perform(source = 'archway')
+    @source = source
+    case @source
+    when 'archway'
+      @object = "job_board/active_positions.csv"
+    when 'summit'
+      @object = "job_board/summit_active_positions.csv"
+    end
     file = download_import_file
     synchronize(file)
   end
@@ -18,14 +24,22 @@ class SynchronizePositionsJob
     SmarterCSV.process(file, smarter_csv_options) do |chunk|
       chunk.each do |position_data|
         import_ids << position_data[:id]
-        JobImporter.new(position_data).import
+        JobImporter.new(position_data, @source).import
       end
     end
-
     destroy_inactive_jobs
   end
 
   def destroy_inactive_jobs
+    case @source
+    when 'archway'
+      destroy_archway_inactive_jobs
+    when 'summit'
+      destroy_summit_inactive_jobs
+    end
+  end
+
+  def destroy_archway_inactive_jobs
     # Generate an array of the aids of archway jobs currenty in database
     archway_ids = Job.archway.pluck(:aid)
     # Filter out ids of jobs which were present in the import list
@@ -34,14 +48,32 @@ class SynchronizePositionsJob
     Job.where(aid: to_delete_ids).destroy_all
   end
 
+  def destroy_summit_inactive_jobs
+    # Generate an array of the sids of summit jobs currenty in database
+    summit_ids = Job.summit.pluck(:sid)
+    # Filter out ids of jobs which were present in the import list
+    to_delete_ids = summit_ids.reject{|id| import_ids.include?(id)}
+    # Delete the jobs which weren't present in the import list (They're now inactive in the CRM)
+    Job.where(sid: to_delete_ids).destroy_all
+  end
+
   def download_import_file
     FileUtils.mkdir_p(path)
-    s3.get_object({ bucket: ENV["ARCHWAY_S3_BUCKET"], key: object }, target: path.join("active_jobs.csv"))
-    path.join("active_jobs.csv")
+    s3.get_object({ bucket: ENV["ARCHWAY_S3_BUCKET"], key: object }, target: target)
+    target
   end
 
   def path
     Rails.root.join("tmp", "s3", "imports")
+  end
+
+  def target
+    case @source
+    when 'archway'
+      path.join("active_jobs.csv")
+    when 'summit'
+      path.join("summit_active_jobs.csv")
+    end
   end
 
   private
@@ -62,4 +94,4 @@ class SynchronizePositionsJob
 
     Aws::S3::Client.new
   end
-end
+end 
