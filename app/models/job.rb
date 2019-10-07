@@ -10,6 +10,7 @@ class Job < ApplicationRecord
   scope :visas, ->(visas){where("lower(visas) LIKE ?", "%#{visas.downcase}%")}
   scope :subspecialty_keywords, ->(keywords){where("lower(subspecialty_keywords) LIKE ?", *keywords.split(" ").map{|keyword| "%#{keyword.downcase}%"})}
   scope :archway, ->{ where.not(aid: nil) }
+  scope :summit, ->{ where.not(sid: nil) }
 
   def self.search(args)
     jobs = Job.all
