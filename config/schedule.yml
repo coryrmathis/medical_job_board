@@ -1,4 +1,10 @@
-synchronize_positions:
+synchronize_archway_positions:
   cron: "0 2 * * * America/Chicago"
   class: "SynchronizePositionsJob"
   queue: "default"
+  args: "archway"
+synchronize_summit_positions:
+  cron: "5 2 * * * America/Chicago"
+  class: "SynchronizePositionsJob"
+  queue: "default"
+  args: "summit"
