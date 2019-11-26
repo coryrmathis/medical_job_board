@@ -7,11 +7,11 @@
         <button class="btn btn-punch btn-lg apply-btn" data-toggle="modal" data-target="#applicationModal">Apply</button>
       </div>
     </div>
-    <div class="panel-body">
-      <div class="job-description">
+    <div class="panel-body row">
+      <div class="job-description col-md-6">
         <%=@job.job_description_markup%>
       </div>
-      <div class="job-map-container">
+      <div class="job-map-container col-md-6">
         <div id="job-map" data-address="<%="#{@job.city.gsub(' ','+')},#{@job.state}"%>">
         </div>
       </div>
