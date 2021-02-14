@@ -75,7 +75,7 @@ gem "redcarpet"
 gem "city-state"
 
 # Pagination
-gem "kaminari", '~> 1.1'
+gem "kaminari", '~> 1.2'
 
 # Error handling
 gem 'airbrake', '~> 7.1'
